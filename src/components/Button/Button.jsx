@@ -19,6 +19,7 @@ export default function Button({
   delay = 0,
 }) {
   const IconComponent = icon || HiLightningBolt;
+  const isExternal = href?.startsWith("http");
   const { navigateWithTransition } = useViewTransition();
   const buttonRef = useRef(null);
   const labelRef = useRef(null);
@@ -136,9 +137,11 @@ export default function Button({
     <a
       ref={buttonRef}
       href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noreferrer" : undefined}
       className={`button button--${variant}`}
       onClick={(e) => {
-        if (!href) return;
+        if (!href || isExternal) return;
         e.preventDefault();
         navigateWithTransition(href);
       }}

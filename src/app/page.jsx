@@ -1,19 +1,22 @@
 "use client";
 import "./home.css";
-import Button from "@/components/Button/Button";
 import Showreel from "@/components/Showreel/Showreel";
 import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
 import ClientReviews from "@/components/ClientReviews/ClientReviews";
 import Spotlight from "@/components/Spotlight/Spotlight";
-import CTACard from "@/components/CTACard/CTACard";
+import DolceFeaturedCards from "@/components/DolceFeaturedCards/DolceFeaturedCards";
 import Footer from "@/components/Footer/Footer";
+import CourseDisciplines from "@/components/CourseDisciplines/CourseDisciplines";
 import Copy from "@/components/Copy/Copy";
-import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SHOW_CLIENT_REVIEWS = false;
+const SHOW_SPOTLIGHT = false;
+const SHOW_SHOWREEL = false;
 
 const Page = () => {
   useEffect(() => {
@@ -32,95 +35,85 @@ const Page = () => {
 
   return (
     <>
-      <Preloader />
       <section className="hero">
+        <div className="dolce-hero-portrait">
+          <picture>
+            <source media="(max-width: 640px)" srcSet="/dolce/hero-chef-mobile-centered.png" />
+            <img src="/dolce/hero-capa-chef-matheus-v2.png" alt="Matheus Engel, chef da Dolce.me, em sua cozinha" />
+          </picture>
+        </div>
+        <div className="hero-rotating-seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200" role="presentation">
+            <defs>
+              <path
+                id="hero-seal-path"
+                d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0"
+              />
+            </defs>
+            <text>
+              <textPath href="#hero-seal-path" startOffset="0%">
+                <tspan>DESCOMPLICANDO </tspan>
+                <tspan className="hero-seal-pink">PICOLÉS</tspan>
+                <tspan> · DESCOMPLICANDO </tspan>
+                <tspan className="hero-seal-pink">PICOLÉS</tspan>
+                <tspan> ·</tspan>
+              </textPath>
+            </text>
+          </svg>
+          <span className="hero-seal-popsicle">
+            <img src="/dolce/popsicle-icon-pink-hq.png" alt="" />
+          </span>
+        </div>
         <div className="container">
           <div className="hero-content-main">
             <div className="hero-header">
-              <Copy animateOnScroll={false} delay={isInitialLoad ? 5.75 : 0.75}>
-                <h1>Crafting Digital Worlds with a Bit of Mischief</h1>
-              </Copy>
+              <div className="hero-brand-lockup">
+                <img src="/dolce/curso-logo-trimmed.png" alt="Descomplicando Picolés" />
+                <Copy animateOnScroll={false} delay={0.2}>
+                  <h1>Torne-se especialista em picolés gourmet e comece um negócio lucrativo, mesmo partindo do zero.</h1>
+                </Copy>
+              </div>
             </div>
 
             <div className="hero-footer-outer">
-              <Copy animateOnScroll={false} delay={isInitialLoad ? 6.35 : 1.65}>
-                <p className="sm">&copy; Codegrid Dept.</p>
-                <p className="sm">( Workroom 101 )</p>
+              <Copy animateOnScroll={false} delay={0.5}>
+                <p className="sm">&copy; Dolce.me Brigadeiria</p>
               </Copy>
             </div>
 
             <div className="hero-footer">
-              <Copy animateOnScroll={false} delay={isInitialLoad ? 6.05 : 1.15}>
+              <Copy animateOnScroll={false} delay={0.35}>
                 <p className="lg">
-                  We build visuals, stories, and systems for people who like
-                  their creativity a little unpredictable.
+                  Aprenda receitas cremosas, recheadas e irresistíveis para criar
+                  o seu produto e começar a vender.
                 </p>
               </Copy>
 
-              <Button delay={isInitialLoad ? 6.35 : 1.55} href="/studio">
-                Visit the Studio
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Showreel />
-
-      <section className="featured-work">
-        <div className="container">
-          <div className="featured-work-header-content">
-            <div className="featured-work-header">
-              <Copy animateOnScroll={true} delay={0.25}>
-                <h1>Featured Work</h1>
-              </Copy>
-            </div>
-
-            <div className="arrow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                viewBox="0 0 32 32"
-                fill="none"
-                className="icon"
+              <a
+                className="hero-premium-cta"
+                href="https://pay.kiwify.com.br/MzpjRKm"
+                target="_blank"
+                rel="noreferrer"
               >
-                <path
-                  d="M16 26.6665L16 5.33317"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M22.6667 19.9999L16 26.6665L9.33337 19.9998"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
-            </div>
-
-            <div className="featured-work-header-copy">
-              <Copy animateOnScroll={true} delay={0.25}>
-                <p className="lg">
-                  From motion to concept, pieces born from quiet sketches, late
-                  nights, and just the right amount of chaos.
-                </p>
-              </Copy>
+                <span>Quero começar agora</span>
+                <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
+              </a>
             </div>
           </div>
-
-          <FeaturedWork />
         </div>
       </section>
 
+      {SHOW_SHOWREEL && <Showreel />}
+
+      <CourseDisciplines />
+
+      {SHOW_CLIENT_REVIEWS && <>
       <section className="client-reviews-header-container">
         <div className="container">
           <div className="client-reviews-header-content">
             <div className="client-reviews-header">
               <Copy animateOnScroll={true} delay={0.25}>
-                <h1>People Approved</h1>
+                <h1>Feito para funcionar de verdade</h1>
               </Copy>
             </div>
 
@@ -152,8 +145,8 @@ const Page = () => {
             <div className="client-reviews-header-copy">
               <Copy animateOnScroll={true} delay={0.25}>
                 <p className="lg">
-                  Unfiltered thoughts from the people who survived our creative
-                  process. Or at least that’s what they told us.
+                  Picolés desenvolvidos, testados, ajustados e vendidos dentro da
+                  Dolce.me antes de se transformarem em curso.
                 </p>
               </Copy>
             </div>
@@ -162,10 +155,11 @@ const Page = () => {
       </section>
 
       <ClientReviews />
+      </>}
 
-      <Spotlight />
+      {SHOW_SPOTLIGHT && <Spotlight />}
 
-      <CTACard />
+      <DolceFeaturedCards />
 
       <Footer />
     </>

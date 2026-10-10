@@ -2,9 +2,11 @@
 import { useEffect, useState, useRef } from "react";
 import { ReactLenis } from "lenis/react";
 import Menu from "./components/Menu/Menu";
+import { usePathname } from "next/navigation";
 
 export default function ClientLayout({ children }) {
   const pageRef = useRef();
+  const pathname = usePathname();
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -54,7 +56,7 @@ export default function ClientLayout({ children }) {
 
   return (
     <ReactLenis root options={scrollSettings}>
-      <Menu pageRef={pageRef} />
+      {pathname !== "/" && <Menu pageRef={pageRef} />}
 
       <div className="page" ref={pageRef}>
         {children}

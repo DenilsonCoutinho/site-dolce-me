@@ -1,0 +1,117 @@
+.dolce-featured-cards {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  padding: 0.75rem;
+  overflow: hidden;
+  background: var(--base-200);
+}
+
+.dolce-featured-cards > .container {
+  padding: 0;
+}
+
+.dolce-featured-cards-wrapper {
+  display: flex;
+  gap: 3rem;
+  width: min(80%, 1500px);
+  height: 100%;
+  margin: 0 auto;
+}
+
+.dolce-featured-cards-header {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  color: var(--base-400);
+}
+
+.dolce-featured-cards-header h2 {
+  width: 82%;
+  margin-bottom: 2.25rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 4.8vw, 6.5rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.075em;
+  text-transform: none;
+}
+
+.dolce-featured-label { color: var(--base-300) !important; }
+
+.dolce-featured-cards-stack {
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
+.dolce-featured-card {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--base-100);
+  transform: translateY(200%);
+  will-change: transform;
+}
+
+.dolce-featured-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--base-200);
+  opacity: var(--card-overlay, 0);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dolce-featured-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dolce-featured-card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  color: var(--base-100);
+  text-align: center;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(65, 80, 58, 0.68), rgba(65, 80, 58, 0.04) 65%);
+}
+
+.dolce-featured-card-content p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 2vw, 2.25rem);
+  font-style: italic;
+}
+
+.dolce-featured-card-content h3 {
+  max-width: 90%;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 4.5vw, 5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.075em;
+  text-transform: none;
+}
+
+@media (max-width: 1000px) {
+  .dolce-featured-cards { height: auto; padding: 1.25rem; overflow: visible; }
+  .dolce-featured-cards-wrapper { flex-direction: column; gap: 2rem; width: 100%; }
+  .dolce-featured-cards-header { padding: 4rem 0 2rem; }
+  .dolce-featured-cards-header h2 { width: 100%; margin-bottom: 1rem; }
+  .dolce-featured-cards-stack { display: flex; flex-direction: column; gap: 1rem; height: auto; }
+  .dolce-featured-card { position: relative; top: auto; transform: none; }
+}

@@ -13,7 +13,8 @@ const Showreel = () => {
   const audioRef = useRef(null);
   const [currentFrame, setCurrentFrame] = useState(1);
   const [isMuted, setIsMuted] = useState(true);
-  const totalFrames = 7;
+  const frames = ["hero.png", "pudim.png", "morango.png", "montagem.png", "brownie.png", "hero.png"];
+  const totalFrames = frames.length;
   const frameInterval = 500;
 
   const toggleMute = () => {
@@ -125,8 +126,8 @@ const Showreel = () => {
     <section className="showreel" ref={showreelSecRef}>
       <div className="showreel-container">
         <img
-          src={`/showreel/showreel-frame-${currentFrame}.jpg`}
-          alt="Showreel frame"
+          src={`/dolce/${frames[currentFrame - 1]}`}
+          alt="Picolés gourmet da Dolce.me"
         />
       </div>
 

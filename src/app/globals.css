@@ -1,17 +1,17 @@
 @import "./fonts.css";
 
 :root {
-  --base-100: #e3e3db;
-  --base-200: #ccccc4;
-  --base-300: #8c7e77;
-  --base-400: #1a1614;
-  --base-500: #ff6e14;
+  --base-100: #FEF1E8;
+  --base-200: #f4ddd1;
+  --base-300: #95945C;
+  --base-400: #41503a;
+  --base-500: #C98F98;
 
-  --accent-1: #3d2fa9;
-  --accent-2: #a92f78;
-  --accent-3: #ff3d33;
-  --accent-4: #785f47;
-  --accent-5: #2f72a9;
+  --accent-1: #95945C;
+  --accent-2: #C98F98;
+  --accent-3: #d67d75;
+  --accent-4: #a96d5a;
+  --accent-5: #68805f;
 
   --variant-1: var(--base-200);
   --variant-2: var(--base-400);
@@ -28,7 +28,7 @@
 }
 
 body {
-  background-color: #000;
+  background-color: var(--base-100);
   color: var(--base-400);
   overflow-x: hidden;
 }

@@ -1,0 +1,37 @@
+.course-disciplines { width: 100%; padding: 0.75rem; background: var(--base-200); color: var(--base-400); }
+.course-disciplines-wrapper { width: 80%; margin: 0 auto; }
+.course-disciplines-intro { position: relative; display: grid; grid-template-columns: 180px 1fr; align-items: flex-start; gap: 3rem; min-height: 26rem; padding: 1.5rem 0 1.75rem; }
+.course-mono { font-family: "DMMono", "Geist Mono", monospace !important; font-size: 0.8rem !important; font-weight: 500 !important; letter-spacing: 0.06em; text-transform: uppercase; }
+.course-disciplines h2, .course-disciplines h3 { font-family: "Bellefair", Georgia, serif; font-weight: 400; letter-spacing: -0.06em; line-height: 0.9; text-transform: none; }
+.course-disciplines h2 { max-width: 900px; font-size: clamp(3.5rem, 7vw, 8rem); }
+.course-disciplines h3 { font-size: clamp(2.7rem, 4.5vw, 5.5rem); }
+.course-floating-pops { position: absolute; bottom: 0; left: 50%; width: 100vw; height: 20rem; pointer-events: none; transform: translateX(-50%); }
+.course-floating-pop { position: absolute; width: clamp(17rem, 26vw, 30rem); height: auto; }
+.course-floating-pop--vanilla { top: -2rem; left: -7%; filter: blur(3.5px) drop-shadow(0 1.5rem 1.4rem rgba(65, 80, 58, 0.25)); transform: rotate(-18deg); }
+.course-floating-pop--chocolate { right: -2%; bottom: -5rem; transform: rotate(66deg); }
+.course-disciplines-content { display: flex; gap: 3rem; padding: 2rem 0 6rem; }
+.course-disciplines-left { position: sticky; top: 0.75rem; display: flex; flex-direction: column; justify-content: space-between; align-self: flex-start; flex-shrink: 0; gap: 3rem; width: min(400px, 40%); height: 100svh; padding: 3rem 0; }
+.course-disciplines-copy img { width: 140px; height: 180px; margin-bottom: 1.5rem; border-radius: 0.375rem; object-fit: cover; }
+.course-disciplines-copy > p { max-width: 430px; font-family: "Bellefair", Georgia, serif; font-size: 1.3rem; }
+.course-disciplines-right { display: flex; flex: 1; flex-direction: column; gap: 6rem; padding: 3rem 0; }
+.course-disciplines-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.course-discipline-card { position: relative; display: grid; grid-template-rows: auto 1fr auto; align-content: space-between; gap: 0.8rem; aspect-ratio: 5 / 7; padding: 1rem; overflow: hidden; border: 1px solid rgba(65, 80, 58, 0.22); border-radius: 0.375rem; background: rgba(254, 241, 232, 0.15); }
+.course-discipline-card img { width: 100%; height: 100%; min-height: 0; border-radius: 0.2rem; object-fit: cover; }
+.course-discipline-card > p:last-child { max-width: 280px; font-family: "Bellefair", Georgia, serif; font-size: clamp(1.5rem, 2.3vw, 2.5rem); line-height: 1; }
+@media (max-width: 1000px) { .course-disciplines { padding: 1.25rem; overflow: hidden; }.course-disciplines-wrapper { width: 100%; }.course-disciplines-intro { grid-template-columns: 1fr; align-content: start; min-height: 23rem; gap: 1.5rem; padding: 1.5rem 0; overflow: visible; }.course-disciplines-intro > .course-mono { display: none; }.course-floating-pops { display: block; height: 15rem; }.course-floating-pop { width: clamp(9rem, 38vw, 13rem); }.course-floating-pop--vanilla { left: -14%; }.course-floating-pop--chocolate { right: -14%; }.course-disciplines-content { flex-direction: column; }.course-disciplines-left { position: static; gap: 3rem; width: 100%; height: max-content; padding: 1rem 0; }.course-disciplines-right { gap: 3rem; padding: 1rem 0; }.course-disciplines-grid { grid-template-columns: 1fr; }.course-discipline-card { aspect-ratio: 1.12 / 1; } }
+
+@media (max-width: 1000px) {
+  .course-disciplines-intro {
+    isolation: isolate;
+  }
+
+  .course-disciplines-intro > :not(.course-floating-pops) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .course-floating-pops {
+    z-index: 0;
+    bottom: -4rem;
+  }
+}
