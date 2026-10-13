@@ -529,24 +529,34 @@
 
 /* Ajuste fino para a largura útil do iPhone 15. */
 @media (min-width: 390px) and (max-width: 430px) and (min-height: 800px) {
+  .dolce-hero-portrait {
+    aspect-ratio: 1.45 / 1;
+  }
+
   .hero .container {
-    margin-top: -8.65rem;
+    margin-top: -8.25rem;
     padding-right: 1.35rem;
     padding-left: 1.35rem;
   }
 
   .hero .container .hero-content-main {
     gap: 0.95rem;
-    padding-top: 1.45rem;
+    padding-top: 1.05rem;
   }
 
   .hero-brand-lockup img {
-    width: min(52vw, 13rem);
+    width: min(48vw, 11.75rem);
+  }
+
+  .hero-brand-lockup h1 {
+    font-size: clamp(2.05rem, 7.35vw, 2.35rem);
+    line-height: 0.94;
   }
 
   .hero-rotating-seal {
-    top: 14.25rem;
-    right: 1rem;
+    top: 12.75rem;
+    right: 0.75rem;
+    width: 5.25rem;
   }
 }
 
