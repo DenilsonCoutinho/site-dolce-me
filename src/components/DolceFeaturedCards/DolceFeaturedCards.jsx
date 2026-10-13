@@ -105,32 +105,30 @@ export default function DolceFeaturedCards() {
         <div className="dolce-featured-cards-wrapper">
           <div className="dolce-featured-cards-header">
             <div className="dolce-featured-title">
-              <Copy><p className="sm dolce-featured-label">Por que aprender com a Dolce.me?</p></Copy>
-              <Copy><h2>Um curso que nasceu da prática, não apenas das receitas.</h2></Copy>
+              <Copy><p className="sm dolce-featured-label">A experiência Dolce.me</p></Copy>
+              <Copy><h2>Da nossa cozinha para a sua produção.</h2></Copy>
             </div>
-            <Copy><p className="dolce-featured-header-copy">Na Dolce.me, os picolés passaram por testes, ajustes e pelo desafio de conquistar os clientes de uma confeitaria de verdade.</p></Copy>
+            <Copy><p className="dolce-featured-header-copy">Antes de se tornarem parte de um curso, nossos picolés passaram por testes, ajustes e pela experiência real de venda na Dolce.me.</p></Copy>
           </div>
 
           <InfiniteImageCarousel />
 
-          <Copy>
-            <div className="dolce-featured-highlight">
-              <p className="dolce-featured-highlight-label">Resultado real da Dolce.me</p>
-              <p className="dolce-featured-highlight-number">+1.000</p>
-              <p className="dolce-featured-highlight-title">picolés vendidos</p>
-              <p className="dolce-featured-highlight-copy">em menos de um mês.</p>
-            </div>
-          </Copy>
           <div className="dolce-featured-story">
-            <Copy><p>Esse foi o resultado que alcançamos após levar nossos picolés para o cardápio da confeitaria.</p></Copy>
-            <Copy><p>E é parte dessa experiência que queremos compartilhar com você.</p></Copy>
-            <Copy><p>O Descomplicando Picolés reúne o conhecimento que desenvolvemos sobre ingredientes, técnicas e processos de produção para que você também possa aprender a criar picolés com mais segurança e autonomia.</p></Copy>
-            <Copy><p>Porque saber reproduzir uma receita é importante. Mas entender o que você está fazendo abre possibilidades para criar muito mais.</p></Copy>
+            <Copy><p>E foi essa experiência que nos motivou a compartilhar não apenas as receitas, mas as técnicas e os conhecimentos por trás de cada etapa da produção.</p></Copy>
+            <Copy><p>Para que você também possa aprender, criar suas próprias combinações e desenvolver picolés com mais segurança e autonomia.</p></Copy>
             <a className="hero-premium-cta dolce-featured-cta" href="https://pay.kiwify.com.br/MzpjRKm">
               <span>Quero aprender agora</span>
               <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
             </a>
           </div>
+          <Copy>
+            <div className="dolce-featured-highlight">
+              <p className="dolce-featured-highlight-label">Resultado real da Dolce.me</p>
+              <p className="dolce-featured-highlight-number">+1.000</p>
+              <p className="dolce-featured-highlight-title">picolés vendidos</p>
+              <p className="dolce-featured-highlight-copy">em menos de um mês de produção.</p>
+            </div>
+          </Copy>
         </div>
       </div>
     </section>
