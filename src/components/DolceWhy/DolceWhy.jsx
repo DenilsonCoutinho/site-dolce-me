@@ -8,6 +8,7 @@ export default function DolceWhy() {
         <div className="dolce-why-heading">
           <Copy><p className="dolce-why-label">Por que aprender com a Dolce.me?</p></Copy>
           <Copy><h2>Um curso que nasceu da prática, não apenas das receitas.</h2></Copy>
+          <img className="dolce-why-mentor" src="/dolce/mentor-matheus.png" alt="Matheus, mentor da Dolce.me, preparando uma receita" />
         </div>
 
         <div className="dolce-why-copy">
