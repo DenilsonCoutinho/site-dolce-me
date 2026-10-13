@@ -7,7 +7,7 @@
 .dolce-why-wrapper {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.8fr);
-  gap: clamp(3rem, 11vw, 12rem);
+  gap: clamp(3rem, 6vw, 7rem);
   width: min(80%, 1500px);
   margin: 0 auto;
 }
@@ -72,6 +72,7 @@
 .dolce-why-result strong { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(3.6rem, 6.7vw, 6rem); font-weight: 400; letter-spacing: -0.075em; line-height: 0.78; white-space: nowrap; }
 .dolce-why-result span { max-width: 11rem; padding-bottom: 0.15rem; }
 .dolce-why-closing { font-weight: 600; }
+.dolce-why-cta { width: min(100%, 29rem); margin-top: 0.55rem; }
 
 @media (max-width: 1000px) {
   .dolce-why { padding: 4rem 1.25rem; }
@@ -81,4 +82,5 @@
   .dolce-why-copy { gap: 1.2rem; padding: 0; }
   .dolce-why-copy > p { font-size: 1.05rem; }
   .dolce-why-result { margin: 0.35rem 0; }
+  .dolce-why-cta { width: 100%; }
 }

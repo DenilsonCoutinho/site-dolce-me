@@ -54,6 +54,10 @@ export default function DolceWhy() {
           <Copy><p>E é parte dessa experiência que queremos compartilhar com você.</p></Copy>
           <Copy><p>O Descomplicando Picolés reúne o conhecimento que desenvolvemos sobre ingredientes, técnicas e processos de produção para que você também possa aprender a criar picolés com mais segurança e autonomia.</p></Copy>
           <Copy><p className="dolce-why-closing">Porque saber reproduzir uma receita é importante. Mas entender o que você está fazendo abre possibilidades para criar muito mais.</p></Copy>
+          <a className="hero-premium-cta dolce-why-cta" href="https://pay.kiwify.com.br/MzpjRKm" target="_blank" rel="noreferrer">
+            <span>Quero aprender agora</span>
+            <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
+          </a>
         </div>
       </div>
     </section>
