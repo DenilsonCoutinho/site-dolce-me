@@ -43,13 +43,13 @@
 }
 
 .dolce-featured-story {
-  grid-column: 1;
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
-  width: 100%;
-  max-width: none;
-  margin: 0;
+  width: min(100%, 50rem);
+  max-width: 50rem;
+  margin: 0 auto;
   padding: clamp(1.5rem, 3.2vw, 2.6rem);
   border: 1px solid rgba(254, 241, 232, 0.35);
   border-radius: 1rem;
@@ -58,7 +58,7 @@
 }
 
 .dolce-featured-story::before {
-  content: "Experiência que vira método";
+  content: "Da prática para a sua produção";
   margin-bottom: 0.15rem;
   font-family: "DM Sans", Arial, sans-serif;
   font-size: 0.72rem;
@@ -77,13 +77,13 @@
 }
 
 .dolce-featured-highlight {
-  grid-column: 2;
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
-  max-width: none;
-  margin: 0;
+  width: min(100%, 58rem);
+  max-width: 58rem;
+  margin: 0 auto;
   padding: clamp(1.5rem, 3vw, 2.4rem);
   border: 1px solid rgba(254, 241, 232, 0.42);
   border-radius: 1rem;
@@ -124,6 +124,7 @@
   .dolce-featured-highlight {
     grid-column: 1;
     width: 100%;
+    max-width: none;
     margin: 0;
   }
   .dolce-featured-story { gap: 1.2rem; max-width: none; }
