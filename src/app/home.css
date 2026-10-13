@@ -530,7 +530,7 @@
 /* Ajuste fino para a largura útil do iPhone 15. */
 @media (min-width: 390px) and (max-width: 430px) {
   .hero .container {
-    margin-top: -8.25rem;
+    margin-top: -6.25rem;
     padding-right: 1.35rem;
     padding-left: 1.35rem;
   }
@@ -550,7 +550,7 @@
   }
 
   .hero-rotating-seal {
-    top: 12.75rem;
+    top: 14.75rem;
     right: 0.75rem;
     width: 5.25rem;
   }
