@@ -1,117 +1,127 @@
 .dolce-featured-cards {
-  position: relative;
   width: 100%;
-  height: 100svh;
-  padding: 0.75rem;
-  overflow: hidden;
-  background: var(--base-200);
+  padding: clamp(4rem, 6vw, 6rem) 0;
+  background: var(--base-300);
+  color: var(--base-100);
 }
 
-.dolce-featured-cards > .container {
-  padding: 0;
-}
+.dolce-featured-cards > .container { padding: 0; }
 
 .dolce-featured-cards-wrapper {
-  display: flex;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  column-gap: clamp(3rem, 9vw, 10rem);
+  row-gap: clamp(2rem, 3vw, 3.5rem);
   width: min(80%, 1500px);
-  height: 100%;
   margin: 0 auto;
 }
 
-.dolce-featured-cards-header {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1.5rem;
-  color: var(--base-400);
+.dolce-featured-cards-header { display: grid; grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.65fr); align-items: end; gap: clamp(2rem, 8vw, 10rem); }
+
+.dolce-featured-label {
+  margin: 0 0 1.25rem;
+  color: var(--base-100) !important;
 }
 
 .dolce-featured-cards-header h2 {
-  width: 82%;
-  margin-bottom: 2.25rem;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 4.8vw, 6.5rem);
-  font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: -0.075em;
-  text-transform: none;
-}
-
-.dolce-featured-label { color: var(--base-300) !important; }
-
-.dolce-featured-cards-stack {
-  position: relative;
-  flex: 1;
-  height: 100%;
-}
-
-.dolce-featured-card {
-  position: absolute;
-  top: 50%;
-  display: flex;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: 0.75rem;
-  background: var(--base-100);
-  transform: translateY(200%);
-  will-change: transform;
-}
-
-.dolce-featured-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--base-200);
-  opacity: var(--card-overlay, 0);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.dolce-featured-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.dolce-featured-card-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem;
-  color: var(--base-100);
-  text-align: center;
-  z-index: 2;
-  background: linear-gradient(0deg, rgba(65, 80, 58, 0.68), rgba(65, 80, 58, 0.04) 65%);
-}
-
-.dolce-featured-card-content p {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.25rem, 2vw, 2.25rem);
-  font-style: italic;
-}
-
-.dolce-featured-card-content h3 {
-  max-width: 90%;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.25rem, 4.5vw, 5rem);
+  max-width: 40rem;
+  margin: 0;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(3rem, 5.2vw, 6.5rem);
   font-weight: 400;
   line-height: 0.9;
-  letter-spacing: -0.075em;
-  text-transform: none;
+  letter-spacing: -0.07em;
 }
 
+.dolce-featured-header-copy {
+  max-width: 31rem;
+  margin: 0 0 0.35rem;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: clamp(1.2rem, 1.8vw, 2rem);
+  line-height: 1.24;
+  letter-spacing: -0.035em;
+}
+
+.dolce-featured-story {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  width: min(100%, 44rem);
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 3.2vw, 2.6rem);
+  border: 1px solid rgba(254, 241, 232, 0.35);
+  border-radius: 1rem;
+  background: rgba(254, 241, 232, 0.08);
+  box-shadow: 0 1.25rem 3rem rgba(65, 80, 58, 0.08);
+}
+
+.dolce-featured-story::before {
+  content: "Experiência que vira método";
+  margin-bottom: 0.15rem;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.dolce-featured-story p {
+  margin: 0;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+  line-height: 1.35;
+}
+
+.dolce-featured-highlight {
+  grid-column: 1 / -1;
+  width: min(100%, 42rem);
+  max-width: 42rem;
+  margin: clamp(1rem, 4vw, 3rem) auto 0;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  border: 1px solid rgba(254, 241, 232, 0.42);
+  border-radius: 1rem;
+  background: rgba(65, 80, 58, 0.22);
+  text-align: center;
+}
+
+.dolce-featured-highlight p { margin: 0; }
+.dolce-featured-highlight-label { font-family: "DM Sans", Arial, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; line-height: 1.2; text-transform: uppercase; }
+.dolce-featured-highlight-number { margin-top: 0.45rem !important; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(4rem, 8vw, 7rem); line-height: 0.82; letter-spacing: -0.07em; }
+.dolce-featured-highlight-title { margin-top: 0.6rem !important; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(1.7rem, 2.8vw, 2.8rem); line-height: 0.94; letter-spacing: -0.045em; }
+.dolce-featured-highlight-copy { margin-top: 0.5rem !important; font-family: "DM Sans", Arial, sans-serif; font-size: clamp(0.95rem, 1.4vw, 1.15rem); line-height: 1.25; opacity: 0.82; }
+.dolce-featured-cta { width: min(100%, 28rem); margin-top: 1rem; }
+
+.dolce-image-carousel {
+  grid-column: 1 / -1;
+  width: 100vw;
+  margin: clamp(1rem, 4vw, 3rem) 0 clamp(1rem, 4vw, 3rem) calc(50% - 50vw);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.dolce-image-track { display: flex; width: max-content; will-change: transform; }
+.dolce-image-track.is-dragging { cursor: grabbing; }
+.dolce-image-set { display: flex; flex: none; gap: 1rem; padding-right: 1rem; }
+.dolce-image-slide { width: clamp(15rem, 23vw, 23rem); margin: 0; overflow: hidden; border-radius: 0.75rem; aspect-ratio: 4 / 5; background: var(--base-100); }
+.dolce-image-slide img { display: block; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; }
+
 @media (max-width: 1000px) {
-  .dolce-featured-cards { height: auto; padding: 1.25rem; overflow: visible; }
-  .dolce-featured-cards-wrapper { flex-direction: column; gap: 2rem; width: 100%; }
-  .dolce-featured-cards-header { padding: 4rem 0 2rem; }
-  .dolce-featured-cards-header h2 { width: 100%; margin-bottom: 1rem; }
-  .dolce-featured-cards-stack { display: flex; flex-direction: column; gap: 1rem; height: auto; }
-  .dolce-featured-card { position: relative; top: auto; transform: none; }
+  .dolce-featured-cards { padding: 4.5rem 1.25rem; }
+  .dolce-featured-cards-wrapper { grid-template-columns: 1fr; gap: 2.5rem; width: 100%; }
+  .dolce-featured-cards-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .dolce-featured-cards-header h2 { max-width: 100%; font-size: clamp(2.9rem, 12vw, 4rem); }
+  .dolce-featured-header-copy { max-width: none; font-size: 1.1rem; }
+  .dolce-featured-story { gap: 1.2rem; max-width: none; }
+  .dolce-featured-story p { font-size: 1.05rem; }
+  .dolce-featured-highlight { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  .dolce-featured-cta { width: 100%; }
+  .dolce-image-carousel { margin: 0.5rem 0 0.5rem calc(50% - 50vw); }
+  .dolce-image-set { gap: 0.75rem; padding-right: 0.75rem; }
+  .dolce-image-slide { width: min(64vw, 17rem); }
 }

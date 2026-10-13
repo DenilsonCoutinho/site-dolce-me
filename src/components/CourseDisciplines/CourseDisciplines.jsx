@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -10,19 +10,114 @@ import "./CourseDisciplines.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const lessons = [
-  { title: "Bases cremosas", image: "/dolce/pudim.png" },
-  { title: "Recheios irresistíveis", image: "/dolce/morango.png" },
-  { title: "Combinações de sabores", image: "/dolce/brownie.png" },
-  { title: "Montagem e finalização", image: "/dolce/montagem.png" },
-  { title: "Custo e precificação", image: "/dolce/custo-precificacao.png" },
-  { title: "Venda e delivery", image: "/dolce/matheus.png" },
+  { title: "Bases cremosas", description: "Aprenda a preparar diferentes bases e entenda como os ingredientes, os açúcares e a estabilização influenciam a cremosidade e a textura dos picolés.", image: "/dolce/pudim.png" },
+  { title: "Geleias, caramelos e recheios crocantes", description: "Descubra como preparar recheios com diferentes texturas e consistências, desenvolvidos para combinar com as bases e valorizar cada sabor.", image: "/dolce/morango.png" },
+  { title: "Criação e combinação de sabores", description: "Aprenda a combinar bases, recheios e coberturas para criar novos sabores, sem ficar limitada às receitas apresentadas no curso.", image: "/dolce/brownie.png" },
+  { title: "Montagem e recheio", description: "Conheça as técnicas de montagem, recheios e fechamento dos picolés para conseguir um resultado bonito e bem estruturado.", image: "/dolce/montagem.png" },
+  { title: "Chocolate e acabamentos", description: "Aprenda temperagem, banho de chocolate e diferentes técnicas de finalização, incluindo coberturas crocantes, decorações e acabamentos especiais.", image: "/dolce/custo-precificacao.png" },
+  { title: "Congelamento e conservação", description: "Entenda os cuidados com congelamento, desenforme, armazenamento e validade para preservar a qualidade dos seus produtos.", image: "/dolce/matheus.png" },
 ];
+
+function LessonCard({ lesson, index, hidden = false }) {
+  return (
+    <article className="course-discipline-card" aria-hidden={hidden || undefined}>
+      <p className="course-mono">0{index + 1}</p>
+      <img src={lesson.image} alt={hidden ? "" : lesson.title} draggable="false" />
+      <p className="course-discipline-card-title">{lesson.title}</p>
+      <p className="course-discipline-card-description">{lesson.description}</p>
+    </article>
+  );
+}
+
+function LessonSet({ hidden = false, setRef }) {
+  return (
+    <div className="course-discipline-mobile-set" aria-hidden={hidden || undefined} ref={setRef}>
+      {lessons.map((lesson, index) => <LessonCard lesson={lesson} index={index} hidden={hidden} key={lesson.title} />)}
+    </div>
+  );
+}
+
+function MobileLessonsCarousel() {
+  const trackRef = useRef(null);
+  const firstSetRef = useRef(null);
+  const positionRef = useRef(0);
+  const pointerRef = useRef(null);
+  const lastFrameRef = useRef(null);
+  const speedRef = useRef(-24);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const paintTrack = () => {
+    const setWidth = firstSetRef.current?.offsetWidth;
+    if (!setWidth) return;
+    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
+    while (positionRef.current > 0) positionRef.current -= setWidth;
+    if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
+  };
+
+  useEffect(() => {
+    let frame;
+    const animate = (time) => {
+      const previous = lastFrameRef.current ?? time;
+      lastFrameRef.current = time;
+      if (!pointerRef.current) {
+        const elapsed = time - previous;
+        speedRef.current += (-24 - speedRef.current) * Math.min(1, elapsed / 750);
+        positionRef.current += (speedRef.current * elapsed) / 1000;
+        paintTrack();
+      }
+      frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  const handlePointerDown = (event) => {
+    pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
+    speedRef.current = 0;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
+    const distance = event.clientX - pointerRef.current.x;
+    const elapsed = Math.max(event.timeStamp - pointerRef.current.time, 16);
+    positionRef.current += distance;
+    speedRef.current = Math.max(-560, Math.min(560, (distance / elapsed) * 1000));
+    pointerRef.current.x = event.clientX;
+    pointerRef.current.time = event.timeStamp;
+    paintTrack();
+  };
+
+  const handlePointerEnd = (event) => {
+    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
+    pointerRef.current = null;
+    setIsDragging(false);
+  };
+
+  return (
+    <div className="course-disciplines-mobile-carousel" aria-label="Módulos do curso">
+      <div
+        className={`course-discipline-mobile-track${isDragging ? " is-dragging" : ""}`}
+        ref={trackRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
+      >
+        <LessonSet setRef={firstSetRef} />
+        <LessonSet hidden />
+      </div>
+    </div>
+  );
+}
 
 export default function CourseDisciplines() {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    const cards = gsap.utils.toArray(".course-discipline-card", sectionRef.current);
+    if (window.innerWidth < 1001) return;
+    const cards = gsap.utils.toArray(".course-disciplines-grid--desktop .course-discipline-card", sectionRef.current);
     if (!cards.length) return;
     gsap.set(cards, { y: 300, opacity: 0 });
     gsap.to(cards, {
@@ -40,34 +135,35 @@ export default function CourseDisciplines() {
       <div className="container">
         <div className="course-disciplines-wrapper">
           <div className="course-disciplines-intro">
-            <Copy><p className="course-mono">[ DESCOMPLICANDO PICOLÉS ]</p></Copy>
-            <Copy><h2>Aprenda a fazer picolés que todo mundo quer provar.</h2></Copy>
+            <div className="course-disciplines-intro-copy">
+              <Copy><h2>Da base ao acabamento:</h2></Copy>
+              <Copy><p className="course-intro-subtitle">Aprenda o que faz um picolé dar certo.</p></Copy>
+            </div>
             <div className="course-floating-pops" aria-hidden="true">
               <img className="course-floating-pop course-floating-pop--vanilla" src="/dolce/floating-vanilla-pop.png" alt="" />
               <img className="course-floating-pop course-floating-pop--chocolate" src="/dolce/floating-chocolate-pop.png" alt="" />
             </div>
+            <span className="course-scroll-cue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M12 19L18 13M12 19L6 13" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </div>
 
           <div className="course-disciplines-content">
             <aside className="course-disciplines-left">
-              <Copy><h3>Do primeiro sabor à venda do seu produto.</h3></Copy>
-              <div className="course-disciplines-copy">
-                <img src="/dolce/brownie.png" alt="Picolé Dolce.me finalizado" />
-                <p>Um curso prático para criar picolés cremosos, recheados e prontos para encantar — mesmo que você esteja começando agora.</p>
-              </div>
+              <Copy><h3>O que você vai aprender</h3></Copy>
+              <Copy><p className="course-disciplines-description">No Descomplicando Picolés, você vai entender não apenas como preparar cada receita, mas também o papel dos ingredientes e das técnicas que fazem diferença no resultado final.</p></Copy>
+              <img className="course-disciplines-feature-image course-disciplines-feature-logo" src="/dolce/curso-logo-trimmed.png" alt="Descomplicando Picolés" />
             </aside>
 
             <div className="course-disciplines-right">
-              <Copy><h3>O que você vai aprender</h3></Copy>
-              <div className="course-disciplines-grid">
+              <div className="course-disciplines-grid course-disciplines-grid--desktop">
                 {lessons.map((lesson, index) => (
-                  <article className="course-discipline-card" key={lesson.title}>
-                    <p className="course-mono">0{index + 1}</p>
-                    <img src={lesson.image} alt={lesson.title} />
-                    <p>{lesson.title}</p>
-                  </article>
+                  <LessonCard lesson={lesson} index={index} key={lesson.title} />
                 ))}
               </div>
+              <MobileLessonsCarousel />
             </div>
           </div>
         </div>

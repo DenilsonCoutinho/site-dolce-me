@@ -71,7 +71,7 @@ nav .close-label {
 .menu-overlay .menu-content p,
 .menu-overlay .menu-content a {
   text-transform: uppercase;
-  font-family: "PP Neue Montreal";
+  font-family: "DM Sans", Arial, sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
   display: inline-block;
@@ -152,7 +152,7 @@ nav .close-label {
   color: var(--base-100);
   text-transform: uppercase;
   text-decoration: none;
-  font-family: "Big Shoulders Display", sans-serif;
+  font-family: "DM Serif Display", Georgia, serif;
   font-size: 10rem;
   font-weight: 900;
   line-height: 0.9;
@@ -205,7 +205,7 @@ nav .open-label,
 nav .close-label {
   position: relative;
   text-transform: uppercase;
-  font-family: "PP Pangram Sans";
+  font-family: "DM Sans", Arial, sans-serif;
   font-size: 0.9rem;
   font-weight: 900;
   -webkit-font-smoothing: antialiased;

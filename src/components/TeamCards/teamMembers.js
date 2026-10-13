@@ -21,7 +21,7 @@ export const teamMembers = [
     img: "/team-cards/team-member-3.jpg",
     alt: "Amara Singh",
     description:
-      "Motion director and timing addict. Can make anything feel cinematic — even an error message.",
+      "Motion director and timing addict. Can make anything feel cinematic, even an error message.",
   },
   {
     id: "card-4",

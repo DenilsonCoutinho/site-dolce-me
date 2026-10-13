@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap");
+
 @font-face {
   font-family: "Geist Mono";
   src: url("/fonts/geist-mono/geist-mono-variable.ttf") format("truetype");
@@ -121,3 +123,4 @@
 @font-face { font-family: "DMMono"; src: url("/fonts/dm-mono/dm-mono-medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
 @font-face { font-family: "Palace"; src: url("/fonts/palace/palace-regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Palace"; src: url("/fonts/palace/palace-italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+

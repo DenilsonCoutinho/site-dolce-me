@@ -38,8 +38,8 @@ const Page = () => {
       <section className="hero">
         <div className="dolce-hero-portrait">
           <picture>
-            <source media="(max-width: 640px)" srcSet="/dolce/hero-chef-mobile-centered.png" />
-            <img src="/dolce/hero-capa-chef-matheus-v2.png" alt="Matheus Engel, chef da Dolce.me, em sua cozinha" />
+            <source media="(max-width: 640px)" srcSet="/dolce/hero-chef-mobile-popsicles.png" />
+            <img src="/dolce/hero-capa-chef-popsicles.png" alt="Matheus Engel, chef da Dolce.me, apresentando picolés gourmet" />
           </picture>
         </div>
         <div className="hero-rotating-seal" aria-hidden="true">
@@ -47,11 +47,11 @@ const Page = () => {
             <defs>
               <path
                 id="hero-seal-path"
-                d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0"
+                d="M 100,100 m -82,0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"
               />
             </defs>
             <text>
-              <textPath href="#hero-seal-path" startOffset="0%">
+              <textPath href="#hero-seal-path" startOffset="0%" textLength="515" lengthAdjust="spacing">
                 <tspan>DESCOMPLICANDO </tspan>
                 <tspan className="hero-seal-pink">PICOLÉS</tspan>
                 <tspan> · DESCOMPLICANDO </tspan>
@@ -70,7 +70,7 @@ const Page = () => {
               <div className="hero-brand-lockup">
                 <img src="/dolce/curso-logo-trimmed.png" alt="Descomplicando Picolés" />
                 <Copy animateOnScroll={false} delay={0.2}>
-                  <h1>Torne-se especialista em picolés gourmet e comece um negócio lucrativo, mesmo partindo do zero.</h1>
+                  <h1>Aprenda a criar picolés cremosos, recheados e cobertos com chocolate, mesmo começando do zero.</h1>
                 </Copy>
               </div>
             </div>
@@ -84,8 +84,7 @@ const Page = () => {
             <div className="hero-footer">
               <Copy animateOnScroll={false} delay={0.35}>
                 <p className="lg">
-                  Aprenda receitas cremosas, recheadas e irresistíveis para criar
-                  o seu produto e começar a vender.
+                  Mais do que seguir receitas, aprenda as técnicas por trás de cada etapa da produção e descubra como desenvolver seus próprios sabores para começar a vender ou acrescentar um novo produto ao seu cardápio.
                 </p>
               </Copy>
 
@@ -95,7 +94,7 @@ const Page = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span>Quero começar agora</span>
+                <span>Quero aprender agora</span>
                 <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
               </a>
             </div>

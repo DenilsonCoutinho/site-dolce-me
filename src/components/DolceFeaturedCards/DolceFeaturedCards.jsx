@@ -1,89 +1,134 @@
 "use client";
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
 import Copy from "@/components/Copy/Copy";
 import "./DolceFeaturedCards.css";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const cards = [
-  { eyebrow: "Cremosos", title: "Picolés que abraçam", image: "/dolce/pudim.png" },
-  { eyebrow: "Recheados", title: "Camadas de sabor", image: "/dolce/morango.png" },
-  { eyebrow: "Para vender", title: "Feitos para encantar", image: "/dolce/montagem.png" },
-  { eyebrow: "Da Dolce.me", title: "Seu novo começo", image: "/dolce/hero.png" },
+const carouselImages = [
+  { src: "/dolce/pudim.png", alt: "Picolé cremoso recheado" },
+  { src: "/dolce/morango.png", alt: "Picolé recheado de morango" },
+  { src: "/dolce/montagem.png", alt: "Picolés em processo de montagem" },
+  { src: "/dolce/hero.png", alt: "Produção de picolés da Dolce.me" },
 ];
 
-export default function DolceFeaturedCards() {
-  const sectionRef = useRef(null);
-  const cardsRef = useRef(null);
+function ImageSet({ hidden = false, setRef }) {
+  return (
+    <div className="dolce-image-set" aria-hidden={hidden || undefined} ref={setRef}>
+      {carouselImages.map((image) => (
+        <figure className="dolce-image-slide" key={image.src}>
+          <img src={image.src} alt={hidden ? "" : image.alt} draggable="false" />
+        </figure>
+      ))}
+    </div>
+  );
+}
 
-  useGSAP(() => {
-    const section = sectionRef.current;
-    const cardEls = cardsRef.current?.querySelectorAll(".dolce-featured-card");
-    if (!section || !cardEls?.length) return;
+function InfiniteImageCarousel() {
+  const trackRef = useRef(null);
+  const firstSetRef = useRef(null);
+  const positionRef = useRef(0);
+  const pointerRef = useRef(null);
+  const lastFrameRef = useRef(null);
+  const speedRef = useRef(-26);
+  const [isDragging, setIsDragging] = useState(false);
 
-    let trigger;
-    const setup = () => {
-      trigger?.kill();
-      cardEls.forEach((card) => gsap.set(card, { clearProps: "all" }));
-      if (window.innerWidth < 1000) return;
+  const paintTrack = () => {
+    const setWidth = firstSetRef.current?.offsetWidth;
+    if (!setWidth) return;
+    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
+    while (positionRef.current > 0) positionRef.current -= setWidth;
+    if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
+  };
 
-      trigger = ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: `+=${window.innerHeight * cardEls.length}`,
-        pin: true,
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress * cardEls.length;
-          cardEls.forEach((card, index) => {
-            const current = gsap.utils.clamp(0, 1, progress - index);
-            const next = gsap.utils.clamp(0, 1, progress - (index + 1));
-            gsap.set(card, {
-              y: gsap.utils.interpolate("200%", "-50%", current),
-              scale: gsap.utils.interpolate(1, 0.87, next),
-              "--card-overlay": gsap.utils.interpolate(0, 0.5, next),
-            });
-          });
-        },
-      });
+  useEffect(() => {
+    let frame;
+    const animate = (time) => {
+      const previous = lastFrameRef.current ?? time;
+      lastFrameRef.current = time;
+      if (!pointerRef.current) {
+        const elapsed = time - previous;
+        speedRef.current += (-26 - speedRef.current) * Math.min(1, elapsed / 750);
+        positionRef.current += (speedRef.current * elapsed) / 1000;
+        paintTrack();
+      }
+      frame = requestAnimationFrame(animate);
     };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
-    setup();
-    const onResize = () => setup();
-    window.addEventListener("resize", onResize);
-    return () => { trigger?.kill(); window.removeEventListener("resize", onResize); };
-  }, { scope: sectionRef });
+  const handlePointerDown = (event) => {
+    pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
+    speedRef.current = 0;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
+    const distance = event.clientX - pointerRef.current.x;
+    const elapsed = Math.max(event.timeStamp - pointerRef.current.time, 16);
+    positionRef.current += distance;
+    speedRef.current = Math.max(-560, Math.min(560, (distance / elapsed) * 1000));
+    pointerRef.current.x = event.clientX;
+    pointerRef.current.time = event.timeStamp;
+    paintTrack();
+  };
+
+  const handlePointerEnd = (event) => {
+    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
+    pointerRef.current = null;
+    setIsDragging(false);
+  };
 
   return (
-    <section className="dolce-featured-cards" ref={sectionRef}>
+    <div className="dolce-image-carousel" aria-label="Picolés produzidos pela Dolce.me">
+      <div
+        className={`dolce-image-track${isDragging ? " is-dragging" : ""}`}
+        ref={trackRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
+      >
+        <ImageSet setRef={firstSetRef} />
+        <ImageSet hidden />
+      </div>
+    </div>
+  );
+}
+
+export default function DolceFeaturedCards() {
+  return (
+    <section className="dolce-featured-cards">
       <div className="container">
         <div className="dolce-featured-cards-wrapper">
           <div className="dolce-featured-cards-header">
-            <Copy><p className="sm dolce-featured-label">[ DESCOMPLICANDO PICOLÉS ]</p></Copy>
-            <Copy>
-              <h2>Receitas que dão vontade de fazer, vender e repetir.</h2>
-            </Copy>
+            <div className="dolce-featured-title">
+              <Copy><p className="sm dolce-featured-label">A experiência Dolce.me</p></Copy>
+              <Copy><h2>Da nossa cozinha para a sua produção.</h2></Copy>
+            </div>
+            <Copy><p className="dolce-featured-header-copy">Antes de se tornarem parte de um curso, nossos picolés passaram por testes, ajustes e pela experiência real de venda na Dolce.me.</p></Copy>
+          </div>
+
+          <InfiniteImageCarousel />
+
+          <div className="dolce-featured-story">
+            <Copy><p>E foi essa experiência que nos motivou a compartilhar não apenas as receitas, mas as técnicas e os conhecimentos por trás de cada etapa da produção.</p></Copy>
+            <Copy><p>Para que você também possa aprender, criar suas próprias combinações e desenvolver picolés com mais segurança e autonomia.</p></Copy>
             <a className="hero-premium-cta dolce-featured-cta" href="https://pay.kiwify.com.br/MzpjRKm">
-              <span>Quero aprender</span>
+              <span>Quero aprender agora</span>
               <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
             </a>
           </div>
-
-          <div className="dolce-featured-cards-stack" ref={cardsRef}>
-            {cards.map((card) => (
-              <article className="dolce-featured-card" key={card.title}>
-                <img src={card.image} alt={card.title} />
-                <div className="dolce-featured-card-content">
-                  <p>{card.eyebrow}</p>
-                  <h3>{card.title}</h3>
-                </div>
-              </article>
-            ))}
-          </div>
+          <Copy>
+            <div className="dolce-featured-highlight">
+              <p className="dolce-featured-highlight-label">Resultado real da Dolce.me</p>
+              <p className="dolce-featured-highlight-number">+1.000</p>
+              <p className="dolce-featured-highlight-title">picolés vendidos</p>
+              <p className="dolce-featured-highlight-copy">em menos de um mês de produção.</p>
+            </div>
+          </Copy>
         </div>
       </div>
     </section>
