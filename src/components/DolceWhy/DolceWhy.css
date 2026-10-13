@@ -59,7 +59,7 @@
 
 .dolce-why-result {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(9rem, 1fr);
   column-gap: 0.65rem;
   align-items: end;
   margin: 0.6rem 0;
@@ -68,10 +68,8 @@
   border-bottom: 1px solid rgba(65, 80, 58, 0.26);
 }
 
-.dolce-why-result p,
 .dolce-why-result span { margin: 0; font-family: "DM Sans", Arial, sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; line-height: 1.15; text-transform: uppercase; }
-.dolce-why-result p { grid-column: 1 / -1; margin-bottom: -0.15rem; }
-.dolce-why-result strong { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(4.4rem, 8vw, 7rem); font-weight: 400; letter-spacing: -0.075em; line-height: 0.78; }
+.dolce-why-result strong { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(3.6rem, 6.7vw, 6rem); font-weight: 400; letter-spacing: -0.075em; line-height: 0.78; white-space: nowrap; }
 .dolce-why-result span { max-width: 11rem; padding-bottom: 0.15rem; }
 .dolce-why-closing { font-weight: 600; }
 

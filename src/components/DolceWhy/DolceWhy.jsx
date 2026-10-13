@@ -1,7 +1,40 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Copy from "@/components/Copy/Copy";
 import "./DolceWhy.css";
 
 export default function DolceWhy() {
+  const resultRef = useRef(null);
+  const [soldCount, setSoldCount] = useState(0);
+
+  useEffect(() => {
+    const result = resultRef.current;
+    if (!result) return undefined;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setSoldCount(1000);
+        return;
+      }
+
+      const duration = 1500;
+      const start = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        setSoldCount(Math.round(1000 * (1 - Math.pow(1 - progress, 3))));
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }, { threshold: 0.45 });
+
+    observer.observe(result);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="dolce-why">
       <div className="dolce-why-wrapper">
@@ -13,9 +46,8 @@ export default function DolceWhy() {
 
         <div className="dolce-why-copy">
           <Copy><p>Na Dolce.me, os picolés passaram por testes, ajustes e pelo desafio de conquistar os clientes de uma confeitaria de verdade.</p></Copy>
-          <div className="dolce-why-result">
-            <p>Mais de</p>
-            <strong>1.000</strong>
+          <div className="dolce-why-result" ref={resultRef}>
+            <strong aria-label={`Mais de ${soldCount} picolés vendidos`}>+ de {soldCount}</strong>
             <span>picolés vendidos em menos de um mês.</span>
           </div>
           <Copy><p>Esse foi o resultado que alcançamos após levar nossos picolés para o cardápio da confeitaria.</p></Copy>
