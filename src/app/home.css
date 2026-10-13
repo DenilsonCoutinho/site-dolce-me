@@ -529,10 +529,6 @@
 
 /* Ajuste fino para a largura útil do iPhone 15. */
 @media (min-width: 390px) and (max-width: 430px) and (min-height: 800px) {
-  .dolce-hero-portrait {
-    aspect-ratio: 1.45 / 1;
-  }
-
   .hero .container {
     margin-top: -8.25rem;
     padding-right: 1.35rem;
