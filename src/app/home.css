@@ -436,7 +436,7 @@
   .dolce-hero-portrait::after {
     display: block;
     inset: 0 0 -1px;
-    background: linear-gradient(180deg, rgba(254, 241, 232, 0) 38%, rgba(254, 241, 232, 0.3) 56%, rgba(254, 241, 232, 0.78) 72%, var(--base-100) 90%);
+    background: linear-gradient(180deg, rgba(254, 241, 232, 0) 50%, rgba(254, 241, 232, 0.2) 66%, rgba(254, 241, 232, 0.72) 82%, var(--base-100) 98%);
   }
 
   .dolce-hero-portrait img {
