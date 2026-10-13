@@ -136,6 +136,7 @@ export default function CourseDisciplines() {
         <div className="course-disciplines-wrapper">
           <div className="course-disciplines-intro">
             <div className="course-disciplines-intro-copy">
+              <Copy><p className="course-mobile-eyebrow">O que você vai aprender</p></Copy>
               <Copy><h2>Da base ao acabamento:</h2></Copy>
               <Copy><p className="course-intro-subtitle">Aprenda o que faz um picolé dar certo.</p></Copy>
             </div>

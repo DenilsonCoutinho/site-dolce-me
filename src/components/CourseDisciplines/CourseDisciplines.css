@@ -1,4 +1,5 @@
 .course-disciplines { width: 100%; padding: 0.75rem; background: var(--base-200); color: var(--base-400); }
+.course-mobile-eyebrow { display: none; }
 .course-disciplines-wrapper { width: 80%; margin: 0 auto; }
 .course-disciplines-intro { position: relative; display: grid; grid-template-columns: 1fr; align-items: flex-start; gap: 3rem; min-height: 16rem; padding: 1.5rem 0 1.75rem; }
 .course-mono { font-family: "DM Sans", Arial, sans-serif !important; font-size: 0.8rem !important; font-weight: 600 !important; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -33,6 +34,46 @@
 
 
 @media (max-width: 1000px) {
+  .course-disciplines-intro {
+    min-height: 0;
+    gap: 0;
+    padding: 2.25rem 0 1.5rem;
+  }
+
+  .course-mobile-eyebrow {
+    display: block;
+    margin: 0 0 0.75rem;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .course-intro-subtitle {
+    margin-top: 0.5rem;
+  }
+
+  .course-disciplines-content {
+    gap: 1.25rem;
+    padding: 0.5rem 0 3.5rem;
+  }
+
+  .course-disciplines-left {
+    gap: 0;
+    padding: 0;
+  }
+
+  .course-disciplines-left h3 {
+    display: none;
+  }
+
+  .course-disciplines-right {
+    gap: 1.25rem;
+    padding-top: 0;
+  }
+
   .course-disciplines-intro {
     isolation: isolate;
   }
