@@ -43,13 +43,13 @@
 }
 
 .dolce-featured-story {
-  grid-column: 1 / -1;
+  grid-column: 1;
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
-  width: min(100%, 44rem);
-  max-width: 44rem;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: clamp(1.5rem, 3.2vw, 2.6rem);
   border: 1px solid rgba(254, 241, 232, 0.35);
   border-radius: 1rem;
@@ -77,10 +77,13 @@
 }
 
 .dolce-featured-highlight {
-  grid-column: 1 / -1;
-  width: min(100%, 42rem);
-  max-width: 42rem;
-  margin: clamp(1rem, 4vw, 3rem) auto 0;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: clamp(1.5rem, 3vw, 2.4rem);
   border: 1px solid rgba(254, 241, 232, 0.42);
   border-radius: 1rem;
@@ -117,6 +120,12 @@
   .dolce-featured-cards-header { grid-template-columns: 1fr; gap: 1.5rem; }
   .dolce-featured-cards-header h2 { max-width: 100%; font-size: clamp(2.9rem, 12vw, 4rem); }
   .dolce-featured-header-copy { max-width: none; font-size: 1.1rem; }
+  .dolce-featured-story,
+  .dolce-featured-highlight {
+    grid-column: 1;
+    width: 100%;
+    margin: 0;
+  }
   .dolce-featured-story { gap: 1.2rem; max-width: none; }
   .dolce-featured-story p { font-size: 1.05rem; }
   .dolce-featured-highlight { font-size: clamp(1.8rem, 8vw, 2.5rem); }
