@@ -27,10 +27,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  width: 100%;
+  overflow-x: clip;
+}
+
 body {
+  width: 100%;
+  max-width: 100%;
   background-color: var(--base-100);
   color: var(--base-400);
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: "DM Sans", Arial, sans-serif;
 }
 

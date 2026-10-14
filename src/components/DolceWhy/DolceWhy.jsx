@@ -37,11 +37,30 @@ export default function DolceWhy() {
 
   return (
     <section className="dolce-why">
+      <div className="dolce-why-seal" aria-hidden="true">
+        <svg viewBox="0 0 200 200" role="presentation">
+          <defs>
+            <path id="dolce-why-seal-path" d="M 100,100 m -82,0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0" />
+          </defs>
+          <text>
+            <textPath href="#dolce-why-seal-path" startOffset="0%" textLength="515" lengthAdjust="spacing">
+              <tspan>DESCOMPLICANDO </tspan>
+              <tspan className="dolce-why-seal-pink">PICOLÉS</tspan>
+              <tspan> · DESCOMPLICANDO </tspan>
+              <tspan className="dolce-why-seal-pink">PICOLÉS</tspan>
+              <tspan> ·</tspan>
+            </textPath>
+          </text>
+        </svg>
+        <span><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
+      </div>
       <div className="dolce-why-wrapper">
         <div className="dolce-why-heading">
           <Copy><p className="dolce-why-label">Por que aprender com a Dolce.me?</p></Copy>
           <Copy><h2>Um curso que nasceu da prática, não apenas das receitas.</h2></Copy>
-          <img className="dolce-why-mentor" src="/dolce/mentor-matheus.png" alt="Matheus, mentor da Dolce.me, preparando uma receita" />
+          <div className="dolce-why-art">
+            <img className="dolce-why-mentor" src="/dolce/course-platform-phones.png" alt="Aulas do curso Descomplicando Picolés em celular" />
+          </div>
         </div>
 
         <div className="dolce-why-copy">

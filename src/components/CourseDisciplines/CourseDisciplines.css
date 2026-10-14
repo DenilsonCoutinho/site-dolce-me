@@ -1,4 +1,5 @@
-.course-disciplines { width: 100%; padding: 0.75rem; background: var(--base-200); color: var(--base-400); }
+.course-disciplines { position: relative; z-index: 1; width: 100%; padding: 0.75rem; background: var(--base-200); color: var(--base-400); }
+.course-section-divider { position: absolute; z-index: 2; bottom: clamp(-4.8rem, -4vw, -3.6rem); left: 50%; display: block; width: clamp(18rem, 20vw, 24rem); height: auto; transform: translateX(-50%); pointer-events: none; }
 .course-mobile-eyebrow { display: none; }
 .course-disciplines-wrapper { width: 80%; margin: 0 auto; }
 .course-disciplines-intro { position: relative; display: grid; grid-template-columns: 1fr; align-items: flex-start; gap: 3rem; min-height: 16rem; padding: 1.5rem 0 1.75rem; }
@@ -41,6 +42,9 @@
 
 
 @media (max-width: 1000px) {
+  .course-disciplines { overflow: visible; }
+  .course-section-divider { bottom: -2.5rem; width: 12.5rem; }
+
   .course-disciplines-intro {
     min-height: 0;
     gap: 0;

@@ -6,6 +6,7 @@ import ClientReviews from "@/components/ClientReviews/ClientReviews";
 import Spotlight from "@/components/Spotlight/Spotlight";
 import DolceFeaturedCards from "@/components/DolceFeaturedCards/DolceFeaturedCards";
 import DolceWhy from "@/components/DolceWhy/DolceWhy";
+import CourseInstructor from "@/components/CourseInstructor/CourseInstructor";
 import Footer from "@/components/Footer/Footer";
 import CourseDisciplines from "@/components/CourseDisciplines/CourseDisciplines";
 import Copy from "@/components/Copy/Copy";
@@ -108,6 +109,8 @@ const Page = () => {
       <CourseDisciplines />
 
       <DolceWhy />
+
+      <CourseInstructor />
 
       {SHOW_CLIENT_REVIEWS && <>
       <section className="client-reviews-header-container">
