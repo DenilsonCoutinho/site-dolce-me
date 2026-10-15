@@ -47,7 +47,7 @@ export default function ClientTestimonials() {
           {testimonialRows.map((row, rowIndex) => (
             <div className={`client-testimonials-marquee client-testimonials-marquee--${rowIndex + 1}`} key={`row-${rowIndex}`}>
               <div className="client-testimonials-marquee-track">
-                {[0, 1].map((copyIndex) => (
+                {[0, 1, 2].map((copyIndex) => (
                   <div className="client-testimonials-marquee-group" key={copyIndex} aria-hidden={copyIndex === 1}>
                     {row.map((testimonial, index) => (
                       <article className="client-testimonials-marquee-card" key={`${copyIndex}-${testimonial}`}>
