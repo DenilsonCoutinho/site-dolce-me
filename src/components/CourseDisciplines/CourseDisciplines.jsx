@@ -38,6 +38,7 @@ function LessonSet({ hidden = false, setRef }) {
 }
 
 export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderSet, copies = 2, initialSet = 0 }) {
+  const carouselRef = useRef(null);
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
@@ -46,6 +47,7 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
   const speedRef = useRef(-24);
   const hasPositionedRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
+  const isIOS = typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const paintTrack = () => {
     const setWidth = firstSetRef.current?.offsetWidth;
@@ -78,7 +80,60 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
     return () => cancelAnimationFrame(frame);
   }, []);
 
+  useEffect(() => {
+    if (!isIOS || !carouselRef.current) return undefined;
+
+    const carousel = carouselRef.current;
+    let touch = null;
+
+    const handleTouchStart = (event) => {
+      const point = event.touches[0];
+      if (!point) return;
+      speedRef.current = 0;
+      touch = { startX: point.clientX, startY: point.clientY, x: point.clientX, time: event.timeStamp, horizontal: null };
+      setIsDragging(true);
+    };
+
+    const handleTouchMove = (event) => {
+      if (!touch) return;
+      const point = event.touches[0];
+      if (!point) return;
+      const horizontalDistance = point.clientX - touch.startX;
+      const verticalDistance = point.clientY - touch.startY;
+      if (touch.horizontal === null && Math.hypot(horizontalDistance, verticalDistance) > 7) {
+        touch.horizontal = Math.abs(horizontalDistance) > Math.abs(verticalDistance);
+      }
+      if (!touch.horizontal) return;
+      event.preventDefault();
+      const distance = point.clientX - touch.x;
+      const elapsed = Math.max(event.timeStamp - touch.time, 16);
+      positionRef.current += distance;
+      speedRef.current = Math.max(-560, Math.min(560, (distance / elapsed) * 1000));
+      touch.x = point.clientX;
+      touch.time = event.timeStamp;
+      paintTrack();
+    };
+
+    const handleTouchEnd = () => {
+      touch = null;
+      setIsDragging(false);
+    };
+
+    carousel.addEventListener("touchstart", handleTouchStart, { passive: true });
+    carousel.addEventListener("touchmove", handleTouchMove, { passive: false });
+    carousel.addEventListener("touchend", handleTouchEnd, { passive: true });
+    carousel.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+
+    return () => {
+      carousel.removeEventListener("touchstart", handleTouchStart);
+      carousel.removeEventListener("touchmove", handleTouchMove);
+      carousel.removeEventListener("touchend", handleTouchEnd);
+      carousel.removeEventListener("touchcancel", handleTouchEnd);
+    };
+  }, [isIOS]);
+
   const handlePointerDown = (event) => {
+    if (isIOS) return;
     pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
     speedRef.current = 0;
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -86,6 +141,7 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
   };
 
   const handlePointerMove = (event) => {
+    if (isIOS) return;
     if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
     const distance = event.clientX - pointerRef.current.x;
     const elapsed = Math.max(event.timeStamp - pointerRef.current.time, 16);
@@ -97,13 +153,14 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
   };
 
   const handlePointerEnd = (event) => {
+    if (isIOS) return;
     if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
     pointerRef.current = null;
     setIsDragging(false);
   };
 
   return (
-    <div className="course-disciplines-mobile-carousel" aria-label={ariaLabel}>
+    <div className="course-disciplines-mobile-carousel" aria-label={ariaLabel} ref={carouselRef}>
       <div
         className={`course-discipline-mobile-track${isDragging ? " is-dragging" : ""}`}
         ref={trackRef}
