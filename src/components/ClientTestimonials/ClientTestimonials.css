@@ -76,7 +76,7 @@
   gap: 1rem;
 }
 
-.client-testimonials-mobile-marquees { display: none; }
+.client-testimonials-lessons-carousel { display: none; }
 
 .client-testimonial {
   display: flex;
@@ -144,38 +144,51 @@
 }
 
 @media (max-width: 640px) {
-  .client-testimonials { padding: 4.5rem 1rem; }
+  .client-testimonials { padding: 3.75rem 1rem 4.5rem; }
   .client-testimonials-divider { bottom: -2.5rem; width: 12.5rem; }
   .client-testimonials h2 { font-size: clamp(2.15rem, 8vw, 2.5rem); }
   .client-testimonials-grid { display: none; }
-  .client-testimonials-mobile-marquees {
-    display: flex;
-    flex-direction: column;
-    gap: .85rem;
+  .client-testimonials-lessons-carousel {
+    display: block !important;
     width: calc(100% + 2rem);
-    margin-left: -1rem;
+    margin: 0 -1rem 1.5rem;
     overflow: hidden;
   }
-  .client-testimonials-marquee { width: 100%; overflow: hidden; }
-  .client-testimonials-marquee-track { display: flex; width: max-content; cursor: grab; touch-action: pan-y; will-change: transform; }
-  .client-testimonials-marquee-track.is-dragging { cursor: grabbing; }
-  .client-testimonials-marquee-group { display: flex; flex: none; gap: .85rem; padding-right: .85rem; }
-  .client-testimonials-marquee-card {
+  .client-testimonials-infinite-carousel { overflow: hidden; }
+  .client-testimonials-infinite-carousel + .client-testimonials-infinite-carousel { margin-top: .85rem; }
+  .client-testimonials-infinite-track {
     display: flex;
-    flex: 0 0 min(78vw, 19rem);
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 13.25rem;
-    padding: 1.2rem;
-    border: 1px solid rgba(254, 241, 232, .3);
-    border-radius: 1rem;
-    background: rgba(254, 241, 232, .09);
+    width: max-content;
+    touch-action: pan-y;
+    will-change: transform;
+  }
+  .client-testimonials-infinite-track.is-dragging { cursor: grabbing; }
+  .client-testimonials-infinite-track .client-testimonials-marquee-group {
+    display: flex;
+    flex: none;
+    gap: .85rem;
+    padding-right: .85rem;
+  }
+  .client-testimonials-lessons-carousel .client-testimonial--carousel {
+    flex: 0 0 calc(100vw - 2rem);
+    min-height: 16rem;
+    scroll-snap-align: start;
+    background: rgba(254, 241, 232, .08);
     color: var(--base-100);
   }
-  .client-testimonials-marquee--2 .client-testimonials-marquee-card { background: var(--base-200); color: var(--base-400); }
-  .client-testimonials-marquee-card > span { height: 1.55rem; color: var(--base-500); font-family: "DM Serif Display", Georgia, serif; font-size: 3.4rem; line-height: 1; }
-  .client-testimonials-marquee-card p { margin: .8rem 0 1rem; font-size: 1.08rem; font-weight: 600; letter-spacing: -.035em; line-height: 1.25; }
-  .client-testimonials-marquee-card small { font-size: .58rem; font-weight: 900; letter-spacing: .09em; opacity: .7; text-transform: uppercase; }
+  .client-testimonials-lessons-carousel img { display: none; }
+  .client-testimonials-lessons-carousel .client-testimonial--carousel .client-testimonial-mark {
+    margin-bottom: .25rem;
+  }
+  .client-testimonials-lessons-carousel .client-testimonial--carousel p {
+    margin: .9rem 0 1.35rem;
+    font-size: 1.16rem;
+  }
+  .client-testimonials-infinite-carousel--right .client-testimonial--carousel {
+    border-color: rgba(254, 241, 232, .72);
+    background: var(--base-100);
+    color: var(--base-400);
+  }
   .client-testimonial,
   .client-testimonial--2,
   .client-testimonial--6,

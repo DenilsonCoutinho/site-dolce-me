@@ -14,7 +14,7 @@ const lessons = [
   { title: "Geleias, caramelos e recheios crocantes", description: "Descubra como preparar recheios com diferentes texturas e consistências, desenvolvidos para combinar com as bases e valorizar cada sabor.", image: "/dolce/morango.avif" },
   { title: "Criação e combinação de sabores", description: "Aprenda a combinar bases, recheios e coberturas para criar novos sabores, sem ficar limitada às receitas apresentadas no curso.", image: "/dolce/brownie.avif" },
   { title: "Montagem e recheio", description: "Conheça as técnicas de montagem, recheios e fechamento dos picolés para conseguir um resultado bonito e bem estruturado.", image: "/dolce/montagem.avif" },
-  { title: "Chocolate e acabamentos", description: "Aprenda temperagem, banho de chocolate e diferentes técnicas de finalização, incluindo coberturas crocantes, decorações e acabamentos especiais.", image: "/dolce/custo-precificacao.avif" },
+  { title: "Chocolate e acabamentos", description: "Aprenda temperagem, banho de chocolate e diferentes técnicas de finalização, incluindo coberturas crocantes, decorações e acabamentos especiais.", image: "/dolce/picoles-chocolate.png" },
   { title: "Congelamento e conservação", description: "Entenda os cuidados com congelamento, desenforme, armazenamento e validade para preservar a qualidade dos seus produtos.", image: "/dolce/matheus.avif" },
 ];
 
@@ -37,7 +37,7 @@ function LessonSet({ hidden = false, setRef }) {
   );
 }
 
-function MobileLessonsCarousel() {
+export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso" }) {
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
@@ -96,7 +96,7 @@ function MobileLessonsCarousel() {
   };
 
   return (
-    <div className="course-disciplines-mobile-carousel" aria-label="Módulos do curso">
+    <div className="course-disciplines-mobile-carousel" aria-label={ariaLabel}>
       <div
         className={`course-discipline-mobile-track${isDragging ? " is-dragging" : ""}`}
         ref={trackRef}

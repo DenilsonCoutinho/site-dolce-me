@@ -26,79 +26,65 @@ const testimonialRows = [
   testimonials.filter((_, index) => index % 2 !== 0),
 ];
 
-function TestimonialSet({ row, hidden = false, setRef }) {
+function TestimonialCard({ testimonial, className = "", hidden = false }) {
   return (
-    <div className="client-testimonials-marquee-group" ref={setRef} aria-hidden={hidden || undefined}>
+    <article className={`client-testimonial ${className}`.trim()} aria-hidden={hidden || undefined}>
+      <span className="client-testimonial-mark" aria-hidden="true">“</span>
+      <p>{testimonial}</p>
+      <span className="client-testimonial-source">Cliente Dolce.me <span aria-hidden="true">♥</span></span>
+    </article>
+  );
+}
+
+function TestimonialSet({ row, featured = false, hidden = false, setRef }) {
+  return (
+    <div className="client-testimonials-marquee-group" aria-hidden={hidden || undefined} ref={setRef}>
       {row.map((testimonial) => (
-        <article className="client-testimonials-marquee-card" key={testimonial}>
-          <span aria-hidden="true">“</span>
-          <p>{testimonial}</p>
-          <small>Cliente Dolce.me ♥</small>
-        </article>
+        <TestimonialCard
+          testimonial={testimonial}
+          className={featured ? "client-testimonial--carousel" : "client-testimonials-marquee-card"}
+          hidden={hidden}
+          key={testimonial}
+        />
       ))}
     </div>
   );
 }
 
-function MobileMarquee({ row, rowIndex }) {
+function InfiniteTestimonialsCarousel({ row, direction = "left" }) {
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
-  const hasMeasuredRef = useRef(false);
   const pointerRef = useRef(null);
   const lastFrameRef = useRef(null);
-  const speedRef = useRef(rowIndex === 0 ? -14 : 14);
+  const targetSpeed = direction === "right" ? 24 : -24;
+  const speedRef = useRef(targetSpeed);
   const [isDragging, setIsDragging] = useState(false);
-  const idleSpeed = rowIndex === 0 ? -14 : 14;
 
   const paintTrack = () => {
     const setWidth = firstSetRef.current?.offsetWidth;
     if (!setWidth) return;
-    if (!hasMeasuredRef.current) {
-      positionRef.current = -setWidth;
-      hasMeasuredRef.current = true;
-    }
-    while (positionRef.current <= -setWidth * 2) positionRef.current += setWidth;
-    while (positionRef.current > -setWidth) positionRef.current -= setWidth;
+    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
+    while (positionRef.current > 0) positionRef.current -= setWidth;
     if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
   };
 
   useEffect(() => {
     let frame;
-    const move = (time) => {
+    const animate = (time) => {
       const previous = lastFrameRef.current ?? time;
       lastFrameRef.current = time;
       if (!pointerRef.current) {
-        const elapsed = Math.min(time - previous, 64);
-        speedRef.current += (idleSpeed - speedRef.current) * Math.min(1, elapsed / 750);
+        const elapsed = time - previous;
+        speedRef.current += (targetSpeed - speedRef.current) * Math.min(1, elapsed / 750);
         positionRef.current += (speedRef.current * elapsed) / 1000;
         paintTrack();
       }
-      frame = requestAnimationFrame(move);
+      frame = requestAnimationFrame(animate);
     };
-    frame = requestAnimationFrame(move);
+    frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, [idleSpeed]);
-
-  useEffect(() => {
-    const releasePointer = () => {
-      pointerRef.current = null;
-      setIsDragging(false);
-      lastFrameRef.current = null;
-    };
-
-    window.addEventListener("pointerup", releasePointer);
-    window.addEventListener("pointercancel", releasePointer);
-    window.addEventListener("blur", releasePointer);
-    document.addEventListener("visibilitychange", releasePointer);
-
-    return () => {
-      window.removeEventListener("pointerup", releasePointer);
-      window.removeEventListener("pointercancel", releasePointer);
-      window.removeEventListener("blur", releasePointer);
-      document.removeEventListener("visibilitychange", releasePointer);
-    };
-  }, []);
+  }, [targetSpeed]);
 
   const handlePointerDown = (event) => {
     pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
@@ -125,21 +111,17 @@ function MobileMarquee({ row, rowIndex }) {
   };
 
   return (
-    <div
-      className={`client-testimonials-marquee client-testimonials-marquee--${rowIndex + 1}`}
-    >
+    <div className={`client-testimonials-infinite-carousel client-testimonials-infinite-carousel--${direction}`} aria-label="Depoimentos de clientes">
       <div
-        className={`client-testimonials-marquee-track${isDragging ? " is-dragging" : ""}`}
+        className={`client-testimonials-infinite-track${isDragging ? " is-dragging" : ""}`}
         ref={trackRef}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
-        onLostPointerCapture={handlePointerEnd}
       >
-        <TestimonialSet row={row} hidden />
-        <TestimonialSet row={row} setRef={firstSetRef} />
-        <TestimonialSet row={row} hidden />
+        <TestimonialSet row={row} featured setRef={firstSetRef} />
+        <TestimonialSet row={row} featured hidden />
       </div>
     </div>
   );
@@ -150,23 +132,19 @@ export default function ClientTestimonials() {
     <section className="client-testimonials" id="depoimentos">
       <div className="client-testimonials-inner">
         <div className="client-testimonials-heading">
-          <Copy><p className="client-testimonials-label">Provas sociais</p></Copy>
           <Copy><h2>Quem prova, conta!</h2></Copy>
           <Copy><p>Nossos picolés já conquistaram muitos clientes aqui na Dolce.me. Confira o que eles estão dizendo.</p></Copy>
         </div>
 
         <div className="client-testimonials-grid">
           {testimonials.map((testimonial, index) => (
-            <article className={`client-testimonial client-testimonial--${index + 1}`} key={testimonial}>
-              <span className="client-testimonial-mark" aria-hidden="true">“</span>
-              <p>{testimonial}</p>
-              <span className="client-testimonial-source">Cliente Dolce.me <span aria-hidden="true">♥</span></span>
-            </article>
+            <TestimonialCard testimonial={testimonial} className={`client-testimonial--${index + 1}`} key={testimonial} />
           ))}
         </div>
 
-        <div className="client-testimonials-mobile-marquees" aria-label="Depoimentos de clientes da Dolce.me">
-          {testimonialRows.map((row, rowIndex) => <MobileMarquee row={row} rowIndex={rowIndex} key={`row-${rowIndex}`} />)}
+        <div className="client-testimonials-lessons-carousel" aria-label="Depoimentos de clientes da Dolce.me">
+          <InfiniteTestimonialsCarousel row={testimonialRows[0]} />
+          <InfiniteTestimonialsCarousel row={testimonialRows[1]} direction="right" />
         </div>
       </div>
       <img className="client-testimonials-divider" src="/dolce/rounded-curve-olive.svg" alt="" aria-hidden="true" />
