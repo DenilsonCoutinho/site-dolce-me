@@ -2,12 +2,15 @@ import "./globals.css";
 import ClientLayout from "@/client-layout";
 import { ViewTransitions } from "next-view-transitions";
 
-const deploymentUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : undefined;
+// A URL pública fixa evita que previews sociais apontem para URLs temporárias
+// de deploy durante o build da Vercel.
+const siteUrl = new URL("https://www.dolcemebrigadeiria.com.br");
 
 export const metadata = {
-  metadataBase: deploymentUrl ? new URL(deploymentUrl) : undefined,
+  metadataBase: siteUrl,
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Descomplicando Picolés | Curso de Picolés Gourmet",
     template: "%s | Descomplicando Picolés",
@@ -22,6 +25,7 @@ export const metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Descomplicando Picolés",
+    url: "/",
     title: "Descomplicando Picolés | Curso de Picolés Gourmet",
     description: "Aprenda técnicas para criar picolés cremosos, recheados e cobertos com chocolate, mesmo começando do zero.",
     images: [{
