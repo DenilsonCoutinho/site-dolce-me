@@ -17,9 +17,9 @@ export const metadata = {
   },
   description: "Aprenda a criar picolés cremosos, recheados e cobertos com chocolate, mesmo começando do zero.",
   icons: {
-    icon: "/dolce/favicon-picole-verde.png",
-    shortcut: "/dolce/favicon-picole-verde.png",
-    apple: "/dolce/favicon-picole-verde.png",
+    icon: [{ url: "/dolce/favicon-picole-verde.svg", type: "image/svg+xml" }],
+    shortcut: "/dolce/favicon-picole-verde.svg",
+    apple: "/dolce/favicon-picole-verde.svg",
   },
   openGraph: {
     type: "website",
