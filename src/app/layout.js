@@ -25,7 +25,7 @@ export const metadata = {
     title: "Descomplicando Picolés | Curso de Picolés Gourmet",
     description: "Aprenda técnicas para criar picolés cremosos, recheados e cobertos com chocolate, mesmo começando do zero.",
     images: [{
-      url: "/dolce/preview-descomplicando-picoles.png",
+      url: "/dolce/preview-descomplicando-picoles-v3.png",
       width: 1200,
       height: 630,
       alt: "Descomplicando Picolés, curso de picolés gourmet",
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Descomplicando Picolés | Curso de Picolés Gourmet",
     description: "Aprenda técnicas para criar picolés cremosos, recheados e cobertos com chocolate.",
-    images: ["/dolce/preview-descomplicando-picoles.png"],
+    images: ["/dolce/preview-descomplicando-picoles-v3.png"],
   },
 };
 

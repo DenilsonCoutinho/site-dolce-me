@@ -156,10 +156,10 @@
     margin-left: -1rem;
     overflow: hidden;
   }
-  .client-testimonials-marquee { width: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; }
-  .client-testimonials-marquee:active { cursor: grabbing; }
-  .client-testimonials-marquee-track { display: flex; width: max-content; will-change: transform; }
-  .client-testimonials-marquee-group { display: flex; gap: .85rem; padding-right: .85rem; }
+  .client-testimonials-marquee { width: 100%; overflow: hidden; }
+  .client-testimonials-marquee-track { display: flex; width: max-content; cursor: grab; touch-action: pan-y; will-change: transform; }
+  .client-testimonials-marquee-track.is-dragging { cursor: grabbing; }
+  .client-testimonials-marquee-group { display: flex; flex: none; gap: .85rem; padding-right: .85rem; }
   .client-testimonials-marquee-card {
     display: flex;
     flex: 0 0 min(78vw, 19rem);
