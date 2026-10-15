@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Copy from "@/components/Copy/Copy";
 import "./ClientTestimonials.css";
 
@@ -35,9 +36,9 @@ function TestimonialCard({ testimonial, className = "" }) {
   );
 }
 
-function TestimonialSet({ row, featured = false }) {
+function TestimonialSet({ row, featured = false, setRef }) {
   return (
-    <div className="client-testimonials-marquee-group">
+    <div className="client-testimonials-marquee-group" ref={setRef}>
       {row.map((testimonial) => (
         <TestimonialCard
           testimonial={testimonial}
@@ -50,9 +51,53 @@ function TestimonialSet({ row, featured = false }) {
 }
 
 function TestimonialsCarousel({ row, tone = "olive" }) {
+  const carouselRef = useRef(null);
+  const trackRef = useRef(null);
+  const setRef = useRef(null);
+  const positionRef = useRef(0);
+  const pointerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const paintTrack = () => {
+    const viewportWidth = carouselRef.current?.clientWidth ?? 0;
+    const contentWidth = setRef.current?.offsetWidth ?? 0;
+    const minimumPosition = Math.min(0, viewportWidth - contentWidth);
+    positionRef.current = Math.max(minimumPosition, Math.min(0, positionRef.current));
+    if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
+  };
+
+  const handlePointerDown = (event) => {
+    pointerRef.current = { id: event.pointerId, x: event.clientX };
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
+    positionRef.current += event.clientX - pointerRef.current.x;
+    pointerRef.current.x = event.clientX;
+    paintTrack();
+  };
+
+  const handlePointerEnd = (event) => {
+    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
+    pointerRef.current = null;
+    setIsDragging(false);
+  };
+
   return (
-    <div className={`client-testimonials-static-carousel client-testimonials-static-carousel--${tone}`} aria-label="Depoimentos de clientes">
-      <TestimonialSet row={row} featured />
+    <div
+      className={`client-testimonials-static-carousel client-testimonials-static-carousel--${tone}${isDragging ? " is-dragging" : ""}`}
+      aria-label="Depoimentos de clientes"
+      ref={carouselRef}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerEnd}
+      onPointerCancel={handlePointerEnd}
+    >
+      <div className="client-testimonials-static-track" ref={trackRef}>
+        <TestimonialSet row={row} featured setRef={setRef} />
+      </div>
     </div>
   );
 }

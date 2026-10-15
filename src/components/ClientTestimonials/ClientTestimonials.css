@@ -155,14 +155,14 @@
     overflow: hidden;
   }
   .client-testimonials-static-carousel {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
   }
-  .client-testimonials-static-carousel::-webkit-scrollbar { display: none; }
   .client-testimonials-static-carousel + .client-testimonials-static-carousel { margin-top: .85rem; }
+  .client-testimonials-static-carousel.is-dragging { cursor: grabbing; }
+  .client-testimonials-static-track { display: flex; width: max-content; will-change: transform; }
   .client-testimonials-static-carousel .client-testimonials-marquee-group {
     display: flex;
     flex: none;
@@ -172,7 +172,6 @@
   .client-testimonials-lessons-carousel .client-testimonial--carousel {
     flex: 0 0 calc(100vw - 2rem);
     min-height: 16rem;
-    scroll-snap-align: start;
     background: rgba(254, 241, 232, .08);
     color: var(--base-100);
   }
