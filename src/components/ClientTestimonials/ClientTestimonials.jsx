@@ -21,14 +21,9 @@ const testimonials = [
   "Muito bom! Adorei!",
 ];
 
-const testimonialRows = [
-  testimonials.filter((_, index) => index % 2 === 0),
-  testimonials.filter((_, index) => index % 2 !== 0),
-];
-
-function TestimonialCard({ testimonial, className = "", hidden = false }) {
+function TestimonialCard({ testimonial, className = "" }) {
   return (
-    <article className={`client-testimonial ${className}`.trim()} aria-hidden={hidden || undefined}>
+    <article className={`client-testimonial ${className}`.trim()}>
       <span className="client-testimonial-mark" aria-hidden="true">“</span>
       <p>{testimonial}</p>
       <span className="client-testimonial-source">Cliente Dolce.me <span aria-hidden="true">♥</span></span>
@@ -36,30 +31,21 @@ function TestimonialCard({ testimonial, className = "", hidden = false }) {
   );
 }
 
-function TestimonialSet({ row, featured = false, setRef, hidden = false }) {
+function CourseTestimonialCard({ testimonial, hidden = false }) {
   return (
-    <div className="course-discipline-mobile-set client-testimonials-marquee-group" ref={setRef} aria-hidden={hidden || undefined}>
-      {row.map((testimonial) => (
-        <TestimonialCard
-          testimonial={testimonial}
-          className={featured ? "client-testimonial--carousel" : "client-testimonials-marquee-card"}
-          hidden={hidden}
-          key={testimonial}
-        />
-      ))}
-    </div>
+    <article className="course-discipline-card client-testimonial-course-card" aria-hidden={hidden || undefined}>
+      <p className="course-mono">Feedback real</p>
+      <span className="client-testimonial-mark" aria-hidden="true">“</span>
+      <p className="client-testimonial-course-copy">{testimonial}</p>
+      <span className="client-testimonial-source">Cliente Dolce.me <span aria-hidden="true">♥</span></span>
+    </article>
   );
 }
 
-function TestimonialsCarousel({ row, tone = "olive" }) {
+function CourseTestimonialSet({ hidden = false, setRef }) {
   return (
-    <div className={`client-testimonials-carousel client-testimonials-carousel--${tone}`}>
-      <MobileLessonsCarousel
-        ariaLabel="Depoimentos de clientes"
-        copies={3}
-        initialSet={1}
-        renderSet={({ hidden, setRef, key }) => <TestimonialSet row={row} featured hidden={hidden} setRef={setRef} key={key} />}
-      />
+    <div className="course-discipline-mobile-set" aria-hidden={hidden || undefined} ref={setRef}>
+      {testimonials.map((testimonial) => <CourseTestimonialCard testimonial={testimonial} hidden={hidden} key={testimonial} />)}
     </div>
   );
 }
@@ -72,16 +58,25 @@ export default function ClientTestimonials() {
           <Copy><h2>Quem prova, conta!</h2></Copy>
           <Copy><p>Nossos picolés já conquistaram muitos clientes aqui na Dolce.me. Confira o que eles estão dizendo.</p></Copy>
         </div>
-
         <div className="client-testimonials-grid">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard testimonial={testimonial} className={`client-testimonial--${index + 1}`} key={testimonial} />
           ))}
         </div>
-
         <div className="client-testimonials-lessons-carousel" aria-label="Depoimentos de clientes da Dolce.me">
-          <TestimonialsCarousel row={testimonialRows[0]} />
-          <TestimonialsCarousel row={testimonialRows[1]} tone="light" />
+          <div className="client-testimonials-course-carousel" aria-label="Carrossel do curso para comparação">
+            <MobileLessonsCarousel
+              ariaLabel="Depoimentos de clientes"
+              renderSet={({ hidden, setRef, key }) => <CourseTestimonialSet hidden={hidden} setRef={setRef} key={key} />}
+            />
+          </div>
+          <div className="client-testimonials-course-carousel client-testimonials-course-carousel--light" aria-label="Depoimentos de clientes">
+            <MobileLessonsCarousel
+              ariaLabel="Depoimentos de clientes"
+              direction={1}
+              renderSet={({ hidden, setRef, key }) => <CourseTestimonialSet hidden={hidden} setRef={setRef} key={key} />}
+            />
+          </div>
         </div>
       </div>
       <img className="client-testimonials-divider" src="/dolce/rounded-curve-olive.svg" alt="" aria-hidden="true" />

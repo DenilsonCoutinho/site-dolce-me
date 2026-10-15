@@ -37,14 +37,14 @@ function LessonSet({ hidden = false, setRef }) {
   );
 }
 
-export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderSet, copies = 2, initialSet = 0 }) {
+export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderSet, copies = 2, initialSet = 0, direction = -1 }) {
   const carouselRef = useRef(null);
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
   const pointerRef = useRef(null);
   const lastFrameRef = useRef(null);
-  const speedRef = useRef(-24);
+  const speedRef = useRef(direction * 24);
   const hasPositionedRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
   const isIOS = typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -70,7 +70,7 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
       lastFrameRef.current = time;
       if (!pointerRef.current) {
         const elapsed = time - previous;
-        speedRef.current += (-24 - speedRef.current) * Math.min(1, elapsed / 750);
+        speedRef.current += (direction * 24 - speedRef.current) * Math.min(1, elapsed / 750);
         positionRef.current += (speedRef.current * elapsed) / 1000;
         paintTrack();
       }
@@ -78,7 +78,7 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
     };
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [direction]);
 
   useEffect(() => {
     if (!isIOS || !carouselRef.current) return undefined;
@@ -179,6 +179,10 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
   );
 }
 
+export function CourseLessonsCarousel() {
+  return <MobileLessonsCarousel ariaLabel="O que você vai aprender" />;
+}
+
 export default function CourseDisciplines() {
   const sectionRef = useRef(null);
 
@@ -231,7 +235,7 @@ export default function CourseDisciplines() {
                   <LessonCard lesson={lesson} index={index} key={lesson.title} />
                 ))}
               </div>
-              <MobileLessonsCarousel />
+              <CourseLessonsCarousel />
             </div>
           </div>
         </div>

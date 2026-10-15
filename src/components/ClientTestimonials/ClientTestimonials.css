@@ -155,6 +155,36 @@
     overflow: hidden;
   }
   .client-testimonials-carousel + .client-testimonials-carousel { margin-top: .85rem; }
+  .client-testimonials-course-carousel { margin-bottom: .85rem; color: var(--base-100); }
+  .client-testimonials-course-carousel .client-testimonial-course-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: min(86vw, 24rem);
+    min-height: 11.25rem;
+    padding: 1.15rem 1.25rem;
+    border-color: rgba(254, 241, 232, .27);
+    border-radius: 1.15rem;
+    background: rgba(254, 241, 232, .08);
+    color: var(--base-100);
+  }
+  .client-testimonials-course-carousel .course-mono { color: rgba(254, 241, 232, .72); }
+  .client-testimonials-course-carousel .client-testimonial-mark { margin: 0; }
+  .client-testimonials-course-carousel--light .client-testimonial-course-card {
+    border-color: rgba(65, 80, 58, .24);
+    background: var(--base-100);
+    color: var(--base-400);
+  }
+  .client-testimonials-course-carousel--light .course-mono,
+  .client-testimonials-course-carousel--light .client-testimonial-source { color: rgba(65, 80, 58, .72); }
+  .client-testimonial-course-copy {
+    margin: .9rem 0 1.35rem;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 1.16rem;
+    font-weight: 600;
+    letter-spacing: -.04em;
+    line-height: 1.25;
+  }
   .client-testimonials-carousel .course-disciplines-mobile-carousel {
     width: 100%;
     margin-left: 0;
@@ -162,6 +192,7 @@
   .client-testimonials-carousel .course-discipline-mobile-set {
     display: flex;
     flex: none;
+    width: max-content;
     gap: .85rem;
     padding-right: .85rem;
   }
