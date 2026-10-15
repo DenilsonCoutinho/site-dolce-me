@@ -74,24 +74,18 @@ const Page = () => {
             <div className="hero-header">
               <div className="hero-brand-lockup">
                 <img src="/dolce/curso-logo-trimmed.png" alt="Descomplicando Picolés" />
-                <Copy animateOnScroll={false} delay={0.2}>
-                  <h1>Aprenda a criar picolés cremosos, recheados e cobertos com chocolate, mesmo começando do zero.</h1>
-                </Copy>
+                <h1>Aprenda a criar picolés cremosos, recheados e cobertos com chocolate, mesmo começando do zero.</h1>
               </div>
             </div>
 
             <div className="hero-footer-outer">
-              <Copy animateOnScroll={false} delay={0.5}>
-                <p className="sm">&copy; Dolce.me Brigadeiria</p>
-              </Copy>
+              <p className="sm">&copy; Dolce.me Brigadeiria</p>
             </div>
 
             <div className="hero-footer">
-              <Copy animateOnScroll={false} delay={0.35}>
-                <p className="lg">
-                  Mais do que seguir receitas, aprenda as técnicas por trás de cada etapa da produção e descubra como desenvolver seus próprios sabores para começar a vender ou acrescentar um novo produto ao seu cardápio.
-                </p>
-              </Copy>
+              <p className="lg">
+                Mais do que seguir receitas, aprenda as técnicas por trás de cada etapa da produção e descubra como desenvolver seus próprios sabores para começar a vender ou acrescentar um novo produto ao seu cardápio.
+              </p>
 
               <a
                 className="hero-premium-cta"

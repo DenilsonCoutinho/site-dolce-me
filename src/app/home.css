@@ -436,7 +436,7 @@
   .dolce-hero-portrait::after {
     display: block;
     inset: 0 0 -1px;
-    background: linear-gradient(180deg, rgba(254, 241, 232, 0) 50%, rgba(254, 241, 232, 0.2) 66%, rgba(254, 241, 232, 0.72) 82%, var(--base-100) 98%);
+    background: linear-gradient(180deg, rgba(254, 241, 232, 0) 27%, rgba(254, 241, 232, 0.26) 43%, rgba(254, 241, 232, 0.72) 61%, rgba(254, 241, 232, 0.96) 77%, var(--base-100) 94%);
   }
 
   .dolce-hero-portrait img {
@@ -550,7 +550,7 @@
   }
 
   .hero-rotating-seal {
-    top: 14.75rem;
+    top: 17.5rem;
     right: 0.75rem;
     width: 5.25rem;
   }

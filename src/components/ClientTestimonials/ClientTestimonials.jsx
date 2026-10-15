@@ -69,7 +69,7 @@ function MobileMarquee({ row, rowIndex }) {
       const previous = lastFrameRef.current ?? time;
       lastFrameRef.current = time;
       if (!pointerRef.current) {
-        const elapsed = time - previous;
+        const elapsed = Math.min(time - previous, 64);
         speedRef.current += (idleSpeed - speedRef.current) * Math.min(1, elapsed / 750);
         positionRef.current += (speedRef.current * elapsed) / 1000;
         paintTrack();
@@ -79,6 +79,26 @@ function MobileMarquee({ row, rowIndex }) {
     frame = requestAnimationFrame(move);
     return () => cancelAnimationFrame(frame);
   }, [idleSpeed]);
+
+  useEffect(() => {
+    const releasePointer = () => {
+      pointerRef.current = null;
+      setIsDragging(false);
+      lastFrameRef.current = null;
+    };
+
+    window.addEventListener("pointerup", releasePointer);
+    window.addEventListener("pointercancel", releasePointer);
+    window.addEventListener("blur", releasePointer);
+    document.addEventListener("visibilitychange", releasePointer);
+
+    return () => {
+      window.removeEventListener("pointerup", releasePointer);
+      window.removeEventListener("pointercancel", releasePointer);
+      window.removeEventListener("blur", releasePointer);
+      document.removeEventListener("visibilitychange", releasePointer);
+    };
+  }, []);
 
   const handlePointerDown = (event) => {
     pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
@@ -115,6 +135,7 @@ function MobileMarquee({ row, rowIndex }) {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
+        onLostPointerCapture={handlePointerEnd}
       >
         <TestimonialSet row={row} hidden />
         <TestimonialSet row={row} setRef={firstSetRef} />
