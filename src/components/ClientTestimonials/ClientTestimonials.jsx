@@ -51,13 +51,14 @@ function TestimonialSet({ row, featured = false, setRef, hidden = false }) {
   );
 }
 
-function TestimonialsCarousel({ row, tone = "olive" }) {
+function TestimonialsCarousel({ row, tone = "olive", direction = "left" }) {
   const trackRef = useRef(null);
   const setRef = useRef(null);
   const positionRef = useRef(0);
   const pointerRef = useRef(null);
-  const velocityRef = useRef(0);
-  const frameRef = useRef(null);
+  const lastFrameRef = useRef(null);
+  const targetSpeed = direction === "right" ? 24 : -24;
+  const speedRef = useRef(targetSpeed);
   const [isDragging, setIsDragging] = useState(false);
 
   const paintTrack = () => {
@@ -69,34 +70,25 @@ function TestimonialsCarousel({ row, tone = "olive" }) {
     return false;
   };
 
-  const stopGlide = () => {
-    if (frameRef.current) cancelAnimationFrame(frameRef.current);
-    frameRef.current = null;
-  };
-
-  const startGlide = () => {
-    stopGlide();
-    let previousTime;
-    const glide = (time) => {
-      const elapsed = Math.min(time - (previousTime ?? time), 32);
-      previousTime = time;
-      positionRef.current += velocityRef.current * elapsed;
-      paintTrack();
-      velocityRef.current *= Math.pow(0.93, elapsed / 16);
-      if (Math.abs(velocityRef.current) > 0.018) {
-        frameRef.current = requestAnimationFrame(glide);
-      } else {
-        frameRef.current = null;
+  useEffect(() => {
+    let frame;
+    const animate = (time) => {
+      const previous = lastFrameRef.current ?? time;
+      lastFrameRef.current = time;
+      if (!pointerRef.current) {
+        const elapsed = time - previous;
+        speedRef.current += (targetSpeed - speedRef.current) * Math.min(1, elapsed / 750);
+        positionRef.current += (speedRef.current * elapsed) / 1000;
+        paintTrack();
       }
+      frame = requestAnimationFrame(animate);
     };
-    frameRef.current = requestAnimationFrame(glide);
-  };
-
-  useEffect(() => () => stopGlide(), []);
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [targetSpeed]);
 
   const handlePointerDown = (event) => {
-    stopGlide();
-    velocityRef.current = 0;
+    speedRef.current = 0;
     pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
     event.currentTarget.setPointerCapture(event.pointerId);
     setIsDragging(true);
@@ -107,7 +99,7 @@ function TestimonialsCarousel({ row, tone = "olive" }) {
     const distance = event.clientX - pointerRef.current.x;
     const elapsed = Math.max(event.timeStamp - pointerRef.current.time, 16);
     positionRef.current += distance;
-    velocityRef.current = distance / elapsed;
+    speedRef.current = Math.max(-560, Math.min(560, (distance / elapsed) * 1000));
     pointerRef.current.x = event.clientX;
     pointerRef.current.time = event.timeStamp;
     paintTrack();
@@ -117,13 +109,13 @@ function TestimonialsCarousel({ row, tone = "olive" }) {
     if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
     pointerRef.current = null;
     setIsDragging(false);
-    startGlide();
   };
 
   return (
     <div
       className={`client-testimonials-static-carousel client-testimonials-static-carousel--${tone}${isDragging ? " is-dragging" : ""}`}
       aria-label="Depoimentos de clientes"
+      data-lenis-prevent
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerEnd}
@@ -154,7 +146,7 @@ export default function ClientTestimonials() {
 
         <div className="client-testimonials-lessons-carousel" aria-label="Depoimentos de clientes da Dolce.me">
           <TestimonialsCarousel row={testimonialRows[0]} />
-          <TestimonialsCarousel row={testimonialRows[1]} tone="light" />
+          <TestimonialsCarousel row={testimonialRows[1]} tone="light" direction="right" />
         </div>
       </div>
       <img className="client-testimonials-divider" src="/dolce/rounded-curve-olive.svg" alt="" aria-hidden="true" />
