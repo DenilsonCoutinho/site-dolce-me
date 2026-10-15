@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Copy from "@/components/Copy/Copy";
 import "./ClientTestimonials.css";
 
@@ -26,9 +26,9 @@ const testimonialRows = [
   testimonials.filter((_, index) => index % 2 !== 0),
 ];
 
-function TestimonialCard({ testimonial, className = "" }) {
+function TestimonialCard({ testimonial, className = "", hidden = false }) {
   return (
-    <article className={`client-testimonial ${className}`.trim()}>
+    <article className={`client-testimonial ${className}`.trim()} aria-hidden={hidden || undefined}>
       <span className="client-testimonial-mark" aria-hidden="true">“</span>
       <p>{testimonial}</p>
       <span className="client-testimonial-source">Cliente Dolce.me <span aria-hidden="true">♥</span></span>
@@ -36,13 +36,14 @@ function TestimonialCard({ testimonial, className = "" }) {
   );
 }
 
-function TestimonialSet({ row, featured = false, setRef }) {
+function TestimonialSet({ row, featured = false, setRef, hidden = false }) {
   return (
-    <div className="client-testimonials-marquee-group" ref={setRef}>
+    <div className="client-testimonials-marquee-group" ref={setRef} aria-hidden={hidden || undefined}>
       {row.map((testimonial) => (
         <TestimonialCard
           testimonial={testimonial}
           className={featured ? "client-testimonial--carousel" : "client-testimonials-marquee-card"}
+          hidden={hidden}
           key={testimonial}
         />
       ))}
@@ -51,31 +52,64 @@ function TestimonialSet({ row, featured = false, setRef }) {
 }
 
 function TestimonialsCarousel({ row, tone = "olive" }) {
-  const carouselRef = useRef(null);
   const trackRef = useRef(null);
   const setRef = useRef(null);
   const positionRef = useRef(0);
   const pointerRef = useRef(null);
+  const velocityRef = useRef(0);
+  const frameRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const paintTrack = () => {
-    const viewportWidth = carouselRef.current?.clientWidth ?? 0;
-    const contentWidth = setRef.current?.offsetWidth ?? 0;
-    const minimumPosition = Math.min(0, viewportWidth - contentWidth);
-    positionRef.current = Math.max(minimumPosition, Math.min(0, positionRef.current));
+    const setWidth = setRef.current?.offsetWidth ?? 0;
+    if (!setWidth) return false;
+    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
+    while (positionRef.current > 0) positionRef.current -= setWidth;
     if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
+    return false;
   };
 
+  const stopGlide = () => {
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    frameRef.current = null;
+  };
+
+  const startGlide = () => {
+    stopGlide();
+    let previousTime;
+    const glide = (time) => {
+      const elapsed = Math.min(time - (previousTime ?? time), 32);
+      previousTime = time;
+      positionRef.current += velocityRef.current * elapsed;
+      paintTrack();
+      velocityRef.current *= Math.pow(0.93, elapsed / 16);
+      if (Math.abs(velocityRef.current) > 0.018) {
+        frameRef.current = requestAnimationFrame(glide);
+      } else {
+        frameRef.current = null;
+      }
+    };
+    frameRef.current = requestAnimationFrame(glide);
+  };
+
+  useEffect(() => () => stopGlide(), []);
+
   const handlePointerDown = (event) => {
-    pointerRef.current = { id: event.pointerId, x: event.clientX };
+    stopGlide();
+    velocityRef.current = 0;
+    pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
     event.currentTarget.setPointerCapture(event.pointerId);
     setIsDragging(true);
   };
 
   const handlePointerMove = (event) => {
     if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
-    positionRef.current += event.clientX - pointerRef.current.x;
+    const distance = event.clientX - pointerRef.current.x;
+    const elapsed = Math.max(event.timeStamp - pointerRef.current.time, 16);
+    positionRef.current += distance;
+    velocityRef.current = distance / elapsed;
     pointerRef.current.x = event.clientX;
+    pointerRef.current.time = event.timeStamp;
     paintTrack();
   };
 
@@ -83,13 +117,13 @@ function TestimonialsCarousel({ row, tone = "olive" }) {
     if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
     pointerRef.current = null;
     setIsDragging(false);
+    startGlide();
   };
 
   return (
     <div
       className={`client-testimonials-static-carousel client-testimonials-static-carousel--${tone}${isDragging ? " is-dragging" : ""}`}
       aria-label="Depoimentos de clientes"
-      ref={carouselRef}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerEnd}
@@ -97,6 +131,7 @@ function TestimonialsCarousel({ row, tone = "olive" }) {
     >
       <div className="client-testimonials-static-track" ref={trackRef}>
         <TestimonialSet row={row} featured setRef={setRef} />
+        <TestimonialSet row={row} featured hidden />
       </div>
     </div>
   );
