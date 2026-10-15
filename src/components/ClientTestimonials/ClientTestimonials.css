@@ -154,16 +154,12 @@
     margin: 0 -1rem 1.5rem;
     overflow: hidden;
   }
-  .client-testimonials-static-carousel {
-    overflow: hidden;
-    cursor: grab;
-    touch-action: pan-y;
-    user-select: none;
+  .client-testimonials-carousel + .client-testimonials-carousel { margin-top: .85rem; }
+  .client-testimonials-carousel .course-disciplines-mobile-carousel {
+    width: 100%;
+    margin-left: 0;
   }
-  .client-testimonials-static-carousel + .client-testimonials-static-carousel { margin-top: .85rem; }
-  .client-testimonials-static-carousel.is-dragging { cursor: grabbing; }
-  .client-testimonials-static-track { display: flex; width: max-content; will-change: transform; }
-  .client-testimonials-static-carousel .client-testimonials-marquee-group {
+  .client-testimonials-carousel .course-discipline-mobile-set {
     display: flex;
     flex: none;
     gap: .85rem;
@@ -183,7 +179,7 @@
     margin: .9rem 0 1.35rem;
     font-size: 1.16rem;
   }
-  .client-testimonials-static-carousel--light .client-testimonial--carousel {
+  .client-testimonials-carousel--light .client-testimonial--carousel {
     border-color: rgba(254, 241, 232, .72);
     background: var(--base-100);
     color: var(--base-400);

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Copy from "@/components/Copy/Copy";
+import { MobileLessonsCarousel } from "@/components/CourseDisciplines/CourseDisciplines";
 import "./ClientTestimonials.css";
 
 const testimonials = [
@@ -38,7 +38,7 @@ function TestimonialCard({ testimonial, className = "", hidden = false }) {
 
 function TestimonialSet({ row, featured = false, setRef, hidden = false }) {
   return (
-    <div className="client-testimonials-marquee-group" ref={setRef} aria-hidden={hidden || undefined}>
+    <div className="course-discipline-mobile-set client-testimonials-marquee-group" ref={setRef} aria-hidden={hidden || undefined}>
       {row.map((testimonial) => (
         <TestimonialCard
           testimonial={testimonial}
@@ -51,80 +51,13 @@ function TestimonialSet({ row, featured = false, setRef, hidden = false }) {
   );
 }
 
-function TestimonialsCarousel({ row, tone = "olive", direction = "left" }) {
-  const trackRef = useRef(null);
-  const setRef = useRef(null);
-  const positionRef = useRef(0);
-  const pointerRef = useRef(null);
-  const lastFrameRef = useRef(null);
-  const targetSpeed = direction === "right" ? 24 : -24;
-  const speedRef = useRef(targetSpeed);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const paintTrack = () => {
-    const setWidth = setRef.current?.offsetWidth ?? 0;
-    if (!setWidth) return false;
-    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
-    while (positionRef.current > 0) positionRef.current -= setWidth;
-    if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
-    return false;
-  };
-
-  useEffect(() => {
-    let frame;
-    const animate = (time) => {
-      const previous = lastFrameRef.current ?? time;
-      lastFrameRef.current = time;
-      if (!pointerRef.current) {
-        const elapsed = time - previous;
-        speedRef.current += (targetSpeed - speedRef.current) * Math.min(1, elapsed / 750);
-        positionRef.current += (speedRef.current * elapsed) / 1000;
-        paintTrack();
-      }
-      frame = requestAnimationFrame(animate);
-    };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [targetSpeed]);
-
-  const handlePointerDown = (event) => {
-    speedRef.current = 0;
-    pointerRef.current = { id: event.pointerId, x: event.clientX, time: event.timeStamp };
-    event.currentTarget.setPointerCapture(event.pointerId);
-    setIsDragging(true);
-  };
-
-  const handlePointerMove = (event) => {
-    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
-    const distance = event.clientX - pointerRef.current.x;
-    const elapsed = Math.max(event.timeStamp - pointerRef.current.time, 16);
-    positionRef.current += distance;
-    speedRef.current = Math.max(-560, Math.min(560, (distance / elapsed) * 1000));
-    pointerRef.current.x = event.clientX;
-    pointerRef.current.time = event.timeStamp;
-    paintTrack();
-  };
-
-  const handlePointerEnd = (event) => {
-    if (!pointerRef.current || pointerRef.current.id !== event.pointerId) return;
-    pointerRef.current = null;
-    setIsDragging(false);
-  };
-
+function TestimonialsCarousel({ row, tone = "olive" }) {
   return (
-    <div
-      className={`client-testimonials-static-carousel client-testimonials-static-carousel--${tone}${isDragging ? " is-dragging" : ""}`}
-      aria-label="Depoimentos de clientes"
-      data-lenis-prevent
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerEnd}
-      onPointerCancel={handlePointerEnd}
-    >
-      <div className="client-testimonials-static-track" ref={trackRef}>
-        <TestimonialSet row={row} featured setRef={setRef} />
-        <TestimonialSet row={row} featured hidden />
-      </div>
+    <div className={`client-testimonials-carousel client-testimonials-carousel--${tone}`}>
+      <MobileLessonsCarousel
+        ariaLabel="Depoimentos de clientes"
+        renderSet={({ hidden, setRef }) => <TestimonialSet row={row} featured hidden={hidden} setRef={setRef} />}
+      />
     </div>
   );
 }
@@ -146,7 +79,7 @@ export default function ClientTestimonials() {
 
         <div className="client-testimonials-lessons-carousel" aria-label="Depoimentos de clientes da Dolce.me">
           <TestimonialsCarousel row={testimonialRows[0]} />
-          <TestimonialsCarousel row={testimonialRows[1]} tone="light" direction="right" />
+          <TestimonialsCarousel row={testimonialRows[1]} tone="light" />
         </div>
       </div>
       <img className="client-testimonials-divider" src="/dolce/rounded-curve-olive.svg" alt="" aria-hidden="true" />

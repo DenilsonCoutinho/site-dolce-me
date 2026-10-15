@@ -37,7 +37,7 @@ function LessonSet({ hidden = false, setRef }) {
   );
 }
 
-export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso" }) {
+export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderSet }) {
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
@@ -105,8 +105,8 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso" }) {
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
       >
-        <LessonSet setRef={firstSetRef} />
-        <LessonSet hidden />
+        {renderSet ? renderSet({ setRef: firstSetRef }) : <LessonSet setRef={firstSetRef} />}
+        {renderSet ? renderSet({ hidden: true }) : <LessonSet hidden />}
       </div>
     </div>
   );
