@@ -61,11 +61,11 @@ export default function Footer() {
           <p>Feito com carinho pela Dolce.me Brigadeiria.</p>
           <p>© 2026 Dolce.me Brigadeiria</p>
           <div className="footer-mobile-links" aria-label="Links institucionais">
-            <Link href="/politica-de-privacidade">Política de Privacidade</Link>
+            <span>Política de Privacidade</span>
             <span aria-hidden="true">|</span>
-            <Link href="/termos-de-uso">Termos de Uso</Link>
+            <span>Termos de Uso</span>
             <span aria-hidden="true">|</span>
-            <Link href="mailto:contato@dolceme.com.br">Contato</Link>
+            <span>Contato</span>
           </div>
         </div>
         <div className="footer-content">
