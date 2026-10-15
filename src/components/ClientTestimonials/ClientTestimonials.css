@@ -156,10 +156,9 @@
     margin-left: -1rem;
     overflow: hidden;
   }
-  .client-testimonials-marquee { width: 100%; overflow: hidden; }
+  .client-testimonials-marquee { width: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; }
+  .client-testimonials-marquee:active { cursor: grabbing; }
   .client-testimonials-marquee-track { display: flex; width: max-content; will-change: transform; }
-  .client-testimonials-marquee--1 .client-testimonials-marquee-track { animation: testimonials-marquee 40s linear infinite; }
-  .client-testimonials-marquee--2 .client-testimonials-marquee-track { animation: testimonials-marquee 40s linear infinite reverse; }
   .client-testimonials-marquee-group { display: flex; gap: .85rem; padding-right: .85rem; }
   .client-testimonials-marquee-card {
     display: flex;
@@ -185,12 +184,4 @@
   .client-testimonial--2 p,
   .client-testimonial--6 p,
   .client-testimonial--8 p { font-size: 1.16rem; }
-}
-
-@keyframes testimonials-marquee {
-  to { transform: translateX(-33.333333%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .client-testimonials-marquee-track { animation-play-state: paused !important; }
 }
