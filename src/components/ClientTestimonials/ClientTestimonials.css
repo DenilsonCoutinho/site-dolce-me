@@ -154,16 +154,16 @@
     margin: 0 -1rem 1.5rem;
     overflow: hidden;
   }
-  .client-testimonials-infinite-carousel { overflow: hidden; }
-  .client-testimonials-infinite-carousel + .client-testimonials-infinite-carousel { margin-top: .85rem; }
-  .client-testimonials-infinite-track {
-    display: flex;
-    width: max-content;
-    touch-action: pan-y;
-    will-change: transform;
+  .client-testimonials-static-carousel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
-  .client-testimonials-infinite-track.is-dragging { cursor: grabbing; }
-  .client-testimonials-infinite-track .client-testimonials-marquee-group {
+  .client-testimonials-static-carousel::-webkit-scrollbar { display: none; }
+  .client-testimonials-static-carousel + .client-testimonials-static-carousel { margin-top: .85rem; }
+  .client-testimonials-static-carousel .client-testimonials-marquee-group {
     display: flex;
     flex: none;
     gap: .85rem;
@@ -184,7 +184,7 @@
     margin: .9rem 0 1.35rem;
     font-size: 1.16rem;
   }
-  .client-testimonials-infinite-carousel--right .client-testimonial--carousel {
+  .client-testimonials-static-carousel--light .client-testimonial--carousel {
     border-color: rgba(254, 241, 232, .72);
     background: var(--base-100);
     color: var(--base-400);
