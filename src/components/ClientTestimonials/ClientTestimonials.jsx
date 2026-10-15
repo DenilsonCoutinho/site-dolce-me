@@ -56,7 +56,9 @@ function TestimonialsCarousel({ row, tone = "olive" }) {
     <div className={`client-testimonials-carousel client-testimonials-carousel--${tone}`}>
       <MobileLessonsCarousel
         ariaLabel="Depoimentos de clientes"
-        renderSet={({ hidden, setRef }) => <TestimonialSet row={row} featured hidden={hidden} setRef={setRef} />}
+        copies={3}
+        initialSet={1}
+        renderSet={({ hidden, setRef, key }) => <TestimonialSet row={row} featured hidden={hidden} setRef={setRef} key={key} />}
       />
     </div>
   );

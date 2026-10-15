@@ -37,20 +37,27 @@ function LessonSet({ hidden = false, setRef }) {
   );
 }
 
-export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderSet }) {
+export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderSet, copies = 2, initialSet = 0 }) {
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
   const pointerRef = useRef(null);
   const lastFrameRef = useRef(null);
   const speedRef = useRef(-24);
+  const hasPositionedRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
 
   const paintTrack = () => {
     const setWidth = firstSetRef.current?.offsetWidth;
     if (!setWidth) return;
-    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
-    while (positionRef.current > 0) positionRef.current -= setWidth;
+    if (!hasPositionedRef.current) {
+      positionRef.current = -setWidth * initialSet;
+      hasPositionedRef.current = true;
+    }
+    const lowerBound = -setWidth * (copies - 1);
+    const upperBound = -setWidth * initialSet;
+    while (positionRef.current <= lowerBound) positionRef.current += setWidth;
+    while (positionRef.current > upperBound) positionRef.current -= setWidth;
     if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
   };
 
@@ -105,8 +112,11 @@ export function MobileLessonsCarousel({ ariaLabel = "Módulos do curso", renderS
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
       >
-        {renderSet ? renderSet({ setRef: firstSetRef }) : <LessonSet setRef={firstSetRef} />}
-        {renderSet ? renderSet({ hidden: true }) : <LessonSet hidden />}
+        {Array.from({ length: copies }, (_, index) => (
+          renderSet
+            ? renderSet({ hidden: index > 0, setRef: index === 0 ? firstSetRef : undefined, key: index })
+            : <LessonSet hidden={index > 0} setRef={index === 0 ? firstSetRef : undefined} key={index} />
+        ))}
       </div>
     </div>
   );
