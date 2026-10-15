@@ -43,8 +43,10 @@ const Page = () => {
       <section className="hero">
         <div className="dolce-hero-portrait">
           <picture>
+            <source media="(max-width: 640px)" srcSet="/dolce/hero-chef-mobile-popsicles.avif" type="image/avif" />
             <source media="(max-width: 640px)" srcSet="/dolce/hero-chef-mobile-popsicles.png" />
-            <img src="/dolce/hero-capa-chef-popsicles.png" alt="Matheus Engel, chef da Dolce.me, apresentando picolés gourmet" />
+            <source srcSet="/dolce/hero-capa-chef-popsicles.avif" type="image/avif" />
+            <img src="/dolce/hero-capa-chef-popsicles.png" fetchPriority="high" decoding="async" alt="Matheus Engel, chef da Dolce.me, apresentando picolés gourmet" />
           </picture>
         </div>
         <div className="hero-rotating-seal" aria-hidden="true">

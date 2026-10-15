@@ -24,7 +24,7 @@ export default function CourseInstructor() {
             </svg>
             <span><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
           </div>
-          <img src="/dolce/mentor-matheus-portrait.png" alt="Matheus Engel, chef confeiteiro e sócio da Dolce.me Brigadeiria" />
+          <img src="/dolce/mentor-matheus-portrait.avif" loading="lazy" decoding="async" alt="Matheus Engel, chef confeiteiro e sócio da Dolce.me Brigadeiria" />
           <figcaption className="course-instructor-experience">
             <span className="course-instructor-identity"><strong>Matheus Engel</strong><small>Chef confeiteiro e sócio da Dolce.me</small></span>
             <span className="course-instructor-years"><strong>+7</strong><small>anos de experiência</small></span>

@@ -35,7 +35,7 @@ export default function CourseGuarantee() {
       <div className="course-guarantee-inner">
         <div className="course-guarantee-panel">
           <div className="course-guarantee-seal-wrap">
-            <img className="course-guarantee-seal" src="/dolce/guarantee-ribbon-badge.png?v=3" alt="Selo de garantia" />
+            <img className="course-guarantee-seal" src="/dolce/guarantee-ribbon-badge.avif" loading="lazy" decoding="async" alt="Selo de garantia" />
             <span className="course-guarantee-seal-days"><strong>7</strong> dias</span>
           </div>
           <div className="course-guarantee-intro">

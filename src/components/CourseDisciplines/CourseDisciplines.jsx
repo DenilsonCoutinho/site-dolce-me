@@ -10,19 +10,19 @@ import "./CourseDisciplines.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const lessons = [
-  { title: "Bases cremosas", description: "Aprenda a preparar diferentes bases e entenda como os ingredientes, os açúcares e a estabilização influenciam a cremosidade e a textura dos picolés.", image: "/dolce/pudim.png" },
-  { title: "Geleias, caramelos e recheios crocantes", description: "Descubra como preparar recheios com diferentes texturas e consistências, desenvolvidos para combinar com as bases e valorizar cada sabor.", image: "/dolce/morango.png" },
-  { title: "Criação e combinação de sabores", description: "Aprenda a combinar bases, recheios e coberturas para criar novos sabores, sem ficar limitada às receitas apresentadas no curso.", image: "/dolce/brownie.png" },
-  { title: "Montagem e recheio", description: "Conheça as técnicas de montagem, recheios e fechamento dos picolés para conseguir um resultado bonito e bem estruturado.", image: "/dolce/montagem.png" },
-  { title: "Chocolate e acabamentos", description: "Aprenda temperagem, banho de chocolate e diferentes técnicas de finalização, incluindo coberturas crocantes, decorações e acabamentos especiais.", image: "/dolce/custo-precificacao.png" },
-  { title: "Congelamento e conservação", description: "Entenda os cuidados com congelamento, desenforme, armazenamento e validade para preservar a qualidade dos seus produtos.", image: "/dolce/matheus.png" },
+  { title: "Bases cremosas", description: "Aprenda a preparar diferentes bases e entenda como os ingredientes, os açúcares e a estabilização influenciam a cremosidade e a textura dos picolés.", image: "/dolce/pudim.avif" },
+  { title: "Geleias, caramelos e recheios crocantes", description: "Descubra como preparar recheios com diferentes texturas e consistências, desenvolvidos para combinar com as bases e valorizar cada sabor.", image: "/dolce/morango.avif" },
+  { title: "Criação e combinação de sabores", description: "Aprenda a combinar bases, recheios e coberturas para criar novos sabores, sem ficar limitada às receitas apresentadas no curso.", image: "/dolce/brownie.avif" },
+  { title: "Montagem e recheio", description: "Conheça as técnicas de montagem, recheios e fechamento dos picolés para conseguir um resultado bonito e bem estruturado.", image: "/dolce/montagem.avif" },
+  { title: "Chocolate e acabamentos", description: "Aprenda temperagem, banho de chocolate e diferentes técnicas de finalização, incluindo coberturas crocantes, decorações e acabamentos especiais.", image: "/dolce/custo-precificacao.avif" },
+  { title: "Congelamento e conservação", description: "Entenda os cuidados com congelamento, desenforme, armazenamento e validade para preservar a qualidade dos seus produtos.", image: "/dolce/matheus.avif" },
 ];
 
 function LessonCard({ lesson, index, hidden = false }) {
   return (
     <article className="course-discipline-card" aria-hidden={hidden || undefined}>
       <p className="course-mono">0{index + 1}</p>
-      <img src={lesson.image} alt={hidden ? "" : lesson.title} draggable="false" />
+      <img src={lesson.image} loading="lazy" decoding="async" alt={hidden ? "" : lesson.title} draggable="false" />
       <p className="course-discipline-card-title">{lesson.title}</p>
       <p className="course-discipline-card-description">{lesson.description}</p>
     </article>
@@ -141,8 +141,8 @@ export default function CourseDisciplines() {
               <Copy><p className="course-intro-subtitle">Aprenda o que faz um picolé dar certo.</p></Copy>
             </div>
             <div className="course-floating-pops" aria-hidden="true">
-              <img className="course-floating-pop course-floating-pop--vanilla" src="/dolce/floating-vanilla-pop.png" alt="" />
-              <img className="course-floating-pop course-floating-pop--chocolate" src="/dolce/floating-chocolate-pop.png" alt="" />
+              <img className="course-floating-pop course-floating-pop--vanilla" src="/dolce/floating-vanilla-pop.avif" loading="lazy" decoding="async" alt="" />
+              <img className="course-floating-pop course-floating-pop--chocolate" src="/dolce/floating-chocolate-pop.avif" loading="lazy" decoding="async" alt="" />
             </div>
             <span className="course-scroll-cue" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

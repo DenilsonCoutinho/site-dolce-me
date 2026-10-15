@@ -60,9 +60,9 @@ export default function CourseIncludes() {
 
         <div className="course-includes-bonus">
           <div className="course-includes-bonus-gallery" aria-label="Bolos gelados preparados pela Dolce.me">
-            <img className="course-includes-bonus-main" src="/dolce/bonus-bolos-gelados-duo.jpg" alt="Bolos gelados com coberturas cremosas" />
-            <img className="course-includes-bonus-pistachio" src="/dolce/bonus-bolos-gelados-pistache.jpg" alt="Bolo gelado de pistache" />
-            <img className="course-includes-bonus-chocolate" src="/dolce/bonus-bolos-gelados-chocolate.jpg" alt="Bolo gelado de chocolate" />
+            <img className="course-includes-bonus-main" src="/dolce/bonus-bolos-gelados-duo.jpg" loading="lazy" decoding="async" alt="Bolos gelados com coberturas cremosas" />
+            <img className="course-includes-bonus-pistachio" src="/dolce/bonus-bolos-gelados-pistache.avif" loading="lazy" decoding="async" alt="Bolo gelado de pistache" />
+            <img className="course-includes-bonus-chocolate" src="/dolce/bonus-bolos-gelados-chocolate.avif" loading="lazy" decoding="async" alt="Bolo gelado de chocolate" />
             <span className="course-includes-bonus-tag">Bônus especial</span>
           </div>
 

@@ -59,7 +59,7 @@ export default function DolceWhy() {
           <Copy><p className="dolce-why-label">Por que aprender com a Dolce.me?</p></Copy>
           <Copy><h2>Um curso que nasceu da prática, não apenas das receitas.</h2></Copy>
           <div className="dolce-why-art">
-            <img className="dolce-why-mentor" src="/dolce/course-platform-phones.png" alt="Aulas do curso Descomplicando Picolés em celular" />
+            <img className="dolce-why-mentor" src="/dolce/course-platform-phones.avif" loading="lazy" decoding="async" alt="Aulas do curso Descomplicando Picolés em celular" />
           </div>
         </div>
 
