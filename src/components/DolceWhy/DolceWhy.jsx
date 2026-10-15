@@ -69,14 +69,17 @@ export default function DolceWhy() {
             <strong aria-label={`Mais de ${soldCount} picolés vendidos`}>+ de {soldCount}</strong>
             <span>picolés vendidos em menos de um mês.</span>
           </div>
-          <Copy><p>Esse foi o resultado que alcançamos após levar nossos picolés para o cardápio da confeitaria.</p></Copy>
-          <Copy><p>E é parte dessa experiência que queremos compartilhar com você.</p></Copy>
-          <Copy><p>O Descomplicando Picolés reúne o conhecimento que desenvolvemos sobre ingredientes, técnicas e processos de produção para que você também possa aprender a criar picolés com mais segurança e autonomia.</p></Copy>
-          <Copy><p className="dolce-why-closing">Porque saber reproduzir uma receita é importante. Mas entender o que você está fazendo abre possibilidades para criar muito mais.</p></Copy>
+          <div className="dolce-why-story">
+            <Copy><p>Esse foi o <span className="dolce-why-highlight">resultado</span> que alcançamos após levar nossos picolés para o cardápio da confeitaria.</p></Copy>
+            <Copy><p>E é parte dessa <span className="dolce-why-highlight">experiência</span> que queremos compartilhar com você.</p></Copy>
+            <Copy><p>O Descomplicando Picolés reúne o conhecimento que desenvolvemos sobre ingredientes, <span className="dolce-why-highlight">técnicas e processos</span> de produção para que você também possa aprender a criar picolés com mais <span className="dolce-why-highlight">segurança e autonomia</span>.</p></Copy>
+            <Copy><p className="dolce-why-closing">Porque saber reproduzir uma receita é importante. Mas entender o que você está fazendo abre possibilidades para criar muito mais.</p></Copy>
+          </div>
           <a className="hero-premium-cta dolce-why-cta" href="https://pay.kiwify.com.br/MzpjRKm" target="_blank" rel="noreferrer">
             <span>Quero aprender agora</span>
             <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
           </a>
+          <img className="dolce-why-course-logo" src="/dolce/curso-logo-trimmed.png" alt="Descomplicando Picolés" />
         </div>
       </div>
     </section>

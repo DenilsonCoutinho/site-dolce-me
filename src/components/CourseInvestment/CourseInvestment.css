@@ -1,0 +1,94 @@
+.course-investment {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(5.5rem, 10vw, 10rem) 2rem;
+  background: var(--base-100);
+  color: var(--base-400);
+}
+
+.course-investment::before,
+.course-investment::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.course-investment::before {
+  top: -20rem;
+  left: -18rem;
+  width: 48rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(149, 148, 92, .17);
+}
+
+.course-investment::after {
+  right: -15rem;
+  bottom: -20rem;
+  width: 45rem;
+  aspect-ratio: 1;
+  background: rgba(201, 143, 152, .15);
+}
+
+.course-investment-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(23rem, .82fr);
+  gap: clamp(3rem, 10vw, 11rem);
+  align-items: center;
+  width: min(100%, 1250px);
+  margin: 0 auto;
+}
+
+.course-investment-intro { max-width: 39rem; }
+.course-investment-label { margin-bottom: .9rem; color: var(--base-500); font-size: .78rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.course-investment h2 { margin: 0; color: var(--base-400); font-size: clamp(3rem, 5.3vw, 5.9rem); letter-spacing: -.075em; line-height: .87; text-transform: uppercase; }
+.course-investment-intro > p:not(.course-investment-label) { margin-top: 1.6rem; color: #5f6857; font-size: 1.12rem; line-height: 1.4; }
+
+.course-investment-card {
+  position: relative;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(65, 80, 58, .2);
+  border-radius: .9rem;
+  background: rgba(255, 250, 246, .88);
+  box-shadow: 0 1.5rem 4rem rgba(65, 80, 58, .14);
+  color: var(--base-400);
+}
+
+.course-investment-card-top { display: flex; align-items: center; justify-content: space-between; padding: .15rem .1rem 1rem; color: var(--base-500); font-size: .65rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.course-investment-card-top span:last-child { color: var(--base-400); }
+.course-investment-plan { padding: 1.35rem 1.35rem 1.45rem; border-bottom: 1px solid rgba(65, 80, 58, .2); background: linear-gradient(135deg, rgba(244, 221, 209, .62), rgba(254, 241, 232, .15)); }
+.course-investment-plan-heading { max-width: 20rem; }
+.course-investment-card-eyebrow { margin: 0 0 .18rem; color: var(--base-500); font-size: .65rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+.course-investment-plan-heading strong { color: var(--base-400); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(1.45rem, 2.2vw, 1.85rem); font-weight: 400; line-height: 1; letter-spacing: -.045em; }
+.course-investment-price { display: flex; align-items: flex-start; margin: 1.5rem 0 .6rem; color: var(--base-400); font-family: "DM Serif Display", Georgia, serif; line-height: .8; }
+.course-investment-price > span { align-self: center; margin-right: .35rem; font-family: "DM Sans", Arial, sans-serif; font-size: .95rem; font-weight: 800; letter-spacing: -.05em; }
+.course-investment-price strong { font-size: clamp(4.5rem, 7vw, 6.35rem); font-weight: 400; letter-spacing: -.09em; }
+.course-investment-price sup { margin-top: .5rem; font-family: "DM Sans", Arial, sans-serif; font-size: .95rem; font-weight: 800; }
+.course-investment-installments { max-width: 25rem; color: #697160; font-size: .88rem; line-height: 1.4; }
+.course-investment-cta { width: calc(100% - 2.7rem); margin: 1.25rem 1.35rem 0; background: var(--base-300); }
+.course-investment-list { display: grid; gap: .7rem; margin: 0; padding: 1.35rem; list-style: none; }
+.course-investment-list li { display: flex; align-items: center; gap: .65rem; font-size: .94rem; font-weight: 600; }
+.course-investment-list svg { color: var(--base-500); stroke-width: 3; }
+.course-investment-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem 1rem; margin: 0 1.35rem; padding: 1.1rem 0 0; border-top: 1px solid rgba(65, 80, 58, .2); color: #727968; font-size: .58rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+.course-investment-trust span { display: inline-flex; align-items: center; gap: .28rem; }.course-investment-trust svg { color: var(--base-500); stroke-width: 2.4; }
+
+@media (max-width: 850px) {
+  .course-investment-inner { grid-template-columns: 1fr; gap: 2.75rem; }
+  .course-investment-intro { max-width: 42rem; }
+  .course-investment-card { width: min(100%, 32rem); }
+}
+
+@media (max-width: 640px) {
+  .course-investment { padding: 4.75rem 1rem; }
+  .course-investment h2 { font-size: clamp(2.15rem, 8vw, 2.5rem); }
+  .course-investment-intro > p:not(.course-investment-label) { font-size: 1.04rem; }
+  .course-investment-card { padding: 1.35rem; border-radius: 1.1rem; }
+  .course-investment-plan { padding: 1.15rem; }
+  .course-investment-cta { width: calc(100% - 2.3rem); margin: 1rem 1.15rem 0; }
+  .course-investment-list { padding: 1.15rem; }
+  .course-investment-trust { margin: 0 1.15rem; }
+  .course-investment-price strong { font-size: min(25vw, 6rem); }
+  .course-investment-trust { justify-content: flex-start; }
+}

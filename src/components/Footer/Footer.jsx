@@ -56,10 +56,21 @@ export default function Footer() {
             <text className="footer-arc-text"><textPath ref={footerTextPathRef} href="#footer-arc-path" startOffset="0%">{FOOTER_ARC_TEXT.repeat(FOOTER_ARC_REPEAT)}</textPath></text>
           </svg>
         </div>
+        <div className="footer-mobile-content">
+          <p className="footer-mobile-course">Descomplicando Picolés</p>
+          <p>Feito com carinho pela Dolce.me Brigadeiria.</p>
+          <p>© 2026 Dolce.me Brigadeiria</p>
+          <div className="footer-mobile-links" aria-label="Links institucionais">
+            <Link href="/politica-de-privacidade">Política de Privacidade</Link>
+            <span aria-hidden="true">|</span>
+            <Link href="/termos-de-uso">Termos de Uso</Link>
+            <span aria-hidden="true">|</span>
+            <Link href="mailto:contato@dolceme.com.br">Contato</Link>
+          </div>
+        </div>
         <div className="footer-content">
           <div className="footer-center">
             <div className="footer-brand"><h1 className="subheader">feito com carinho pela</h1><h1>Dolce.me</h1></div>
-            <div className="footer-newsletter"><input type="email" placeholder="Digite seu e-mail" className="footer-newsletter-input" /><button className="footer-newsletter-btn"><p className="mono sm">Quero entrar</p></button></div>
           </div>
           <div className="footer-nav-row">
             <div className="footer-nav footer-nav-left">{FOOTER_NAV_LEFT.map(({ label, href }) => <Link href={href} key={label} className="footer-nav-link"><p className="mono sm">{label}</p></Link>)}</div>

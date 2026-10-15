@@ -4,9 +4,12 @@ import Showreel from "@/components/Showreel/Showreel";
 import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
 import ClientReviews from "@/components/ClientReviews/ClientReviews";
 import Spotlight from "@/components/Spotlight/Spotlight";
-import DolceFeaturedCards from "@/components/DolceFeaturedCards/DolceFeaturedCards";
 import DolceWhy from "@/components/DolceWhy/DolceWhy";
 import CourseInstructor from "@/components/CourseInstructor/CourseInstructor";
+import CourseIncludes from "@/components/CourseIncludes/CourseIncludes";
+import ClientTestimonials from "@/components/ClientTestimonials/ClientTestimonials";
+import CourseInvestment from "@/components/CourseInvestment/CourseInvestment";
+import CourseGuarantee from "@/components/CourseGuarantee/CourseGuarantee";
 import Footer from "@/components/Footer/Footer";
 import CourseDisciplines from "@/components/CourseDisciplines/CourseDisciplines";
 import Copy from "@/components/Copy/Copy";
@@ -112,6 +115,14 @@ const Page = () => {
 
       <CourseInstructor />
 
+      <CourseIncludes />
+
+      <ClientTestimonials />
+
+      <CourseInvestment />
+
+      <CourseGuarantee />
+
       {SHOW_CLIENT_REVIEWS && <>
       <section className="client-reviews-header-container">
         <div className="container">
@@ -163,8 +174,6 @@ const Page = () => {
       </>}
 
       {SHOW_SPOTLIGHT && <Spotlight />}
-
-      <DolceFeaturedCards />
 
       <Footer />
     </>

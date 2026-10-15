@@ -101,6 +101,32 @@
   line-height: 1.35;
 }
 
+.dolce-why-highlight {
+  padding: .06em .3em .1em;
+  border-radius: .34em;
+  background: var(--base-500);
+  color: var(--base-100);
+  font-weight: 700;
+  white-space: nowrap;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.dolce-why-story {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.dolce-why-story p {
+  margin: 0;
+  color: var(--base-300);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: clamp(1.08rem, 1.45vw, 1.38rem);
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+}
+
 .dolce-why-result {
   display: grid;
   grid-template-columns: auto minmax(9rem, 1fr);
@@ -117,16 +143,20 @@
 .dolce-why-result span { max-width: 11rem; padding-bottom: 0.15rem; }
 .dolce-why-closing { font-weight: 600; }
 .dolce-why-cta { width: min(100%, 29rem); margin-top: 0.55rem; }
+.dolce-why-course-logo { align-self: center; width: min(65%, 18rem); height: auto; margin: 1.3rem auto 0; opacity: 0.7; }
 
 @media (max-width: 1000px) {
-  .dolce-why { padding: 4rem 1.25rem; }
+  .dolce-why { padding: 4rem 1rem; }
   .dolce-why-seal { display: none; }
   .dolce-why-wrapper { grid-template-columns: 1fr; gap: 2.5rem; width: 100%; }
-  .dolce-why h2 { max-width: 27rem; font-size: clamp(2.35rem, 9vw, 3.25rem); }
+  .dolce-why h2 { max-width: 27rem; font-size: clamp(2.15rem, 8vw, 2.5rem); }
   .dolce-why-art { width: 100%; margin-top: 2rem; }
   .dolce-why-art::before { display: none; }
   .dolce-why-copy { gap: 1.2rem; padding: 0; }
   .dolce-why-copy > p { font-size: 1.05rem; }
+  .dolce-why-story { gap: 1.2rem; }
+  .dolce-why-story p { font-size: 1.05rem; }
   .dolce-why-result { margin: 0.35rem 0; }
   .dolce-why-cta { width: 100%; }
+  .dolce-why-course-logo { width: min(58%, 15rem); margin-top: 0.8rem; }
 }

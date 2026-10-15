@@ -169,7 +169,7 @@ export default function CourseDisciplines() {
           </div>
         </div>
       </div>
-      <img className="course-section-divider" src="/dolce/rounded-curve.svg?v=3" alt="" aria-hidden="true" />
+      <img className="course-section-divider" src="/dolce/rounded-curve.svg?v=4" alt="" aria-hidden="true" />
     </section>
   );
 }

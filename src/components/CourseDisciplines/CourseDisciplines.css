@@ -38,7 +38,7 @@
     text-wrap: balance;
   }
 }
-@media (max-width: 1000px) { .course-disciplines { padding: 1.25rem; overflow: hidden; }.course-disciplines-wrapper { width: 100%; }.course-disciplines-intro { grid-template-columns: 1fr; align-content: start; min-height: 13.5rem; gap: 1.5rem; padding: 1.25rem 0 0.25rem; overflow: visible; }.course-disciplines-intro-copy { width: 100%; max-width: none; margin: 0; }.course-disciplines h2 { width: 100%; max-width: none; margin: 0; font-size: clamp(2rem, 7.2vw, 2.45rem); line-height: 0.93; text-align: left; }.course-intro-subtitle { max-width: 24rem; margin: 0.65rem 0 0; font-size: clamp(1.2rem, 5vw, 1.5rem); line-height: 1.22; text-align: left; }.course-disciplines-left h3 { font-size: clamp(2rem, 7.2vw, 2.45rem); line-height: 0.93; }.course-scroll-cue, .course-disciplines-feature-logo { display: none; }.course-disciplines-intro > .course-mono { display: none; }.course-floating-pops { display: none; }.course-disciplines-content { flex-direction: column; }.course-disciplines-left { position: static; gap: 1rem; width: 100%; height: max-content; padding: 0.25rem 0; }.course-disciplines-right { gap: 2rem; padding: 0.5rem 0; }.course-disciplines-description { font-size: 1.05rem; }.course-disciplines-grid { grid-template-columns: 1fr; }.course-discipline-card { aspect-ratio: 1.12 / 1; } }
+@media (max-width: 1000px) { .course-disciplines { padding: 1rem; overflow: hidden; }.course-disciplines-wrapper { width: 100%; }.course-disciplines-intro { grid-template-columns: 1fr; align-content: start; min-height: 13.5rem; gap: 1.5rem; padding: 1.25rem 0 0.25rem; overflow: visible; }.course-disciplines-intro-copy { width: 100%; max-width: none; margin: 0; }.course-disciplines h2 { width: 100%; max-width: none; margin: 0; font-size: clamp(2rem, 7.2vw, 2.45rem); line-height: 0.93; text-align: left; }.course-intro-subtitle { max-width: 24rem; margin: 0.65rem 0 0; font-size: clamp(1.2rem, 5vw, 1.5rem); line-height: 1.22; text-align: left; }.course-disciplines-left h3 { font-size: clamp(2rem, 7.2vw, 2.45rem); line-height: 0.93; }.course-scroll-cue, .course-disciplines-feature-logo { display: none; }.course-disciplines-intro > .course-mono { display: none; }.course-floating-pops { display: none; }.course-disciplines-content { flex-direction: column; }.course-disciplines-left { position: static; gap: 1rem; width: 100%; height: max-content; padding: 0.25rem 0; }.course-disciplines-right { gap: 2rem; padding: 0.5rem 0; }.course-disciplines-description { font-size: 1.05rem; }.course-disciplines-grid { grid-template-columns: 1fr; }.course-discipline-card { aspect-ratio: 1.12 / 1; } }
 
 
 @media (max-width: 1000px) {
@@ -109,8 +109,8 @@
 
   .course-disciplines-mobile-carousel {
     display: block;
-    width: calc(100% + 2.5rem);
-    margin-left: -1.25rem;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
     overflow: hidden;
     cursor: grab;
     touch-action: pan-y;
@@ -121,4 +121,8 @@
   .course-discipline-mobile-track.is-dragging { cursor: grabbing; }
   .course-discipline-mobile-set { display: flex; flex: none; gap: 0.85rem; padding-right: 0.85rem; }
   .course-discipline-mobile-set .course-discipline-card { width: min(78vw, 21rem); flex: none; }
+}
+
+@media (max-width: 640px) {
+  .course-disciplines h2 { font-size: clamp(2.15rem, 8vw, 2.5rem); }
 }

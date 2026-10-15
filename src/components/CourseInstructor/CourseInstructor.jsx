@@ -5,6 +5,11 @@ export default function CourseInstructor() {
   return (
     <section className="course-instructor">
       <div className="course-instructor-wrapper">
+        <div className="course-instructor-heading">
+          <Copy><p className="course-instructor-label">Quem vai ensinar você?</p></Copy>
+          <Copy><h2>Conheça o chef por trás do Descomplicando Picolés.</h2></Copy>
+        </div>
+
         <figure className="course-instructor-portrait">
           <div className="course-instructor-seal" aria-hidden="true">
             <svg viewBox="0 0 200 200" role="presentation">
@@ -20,22 +25,21 @@ export default function CourseInstructor() {
             <span><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
           </div>
           <img src="/dolce/mentor-matheus-portrait.png" alt="Matheus Engel, chef confeiteiro e sócio da Dolce.me Brigadeiria" />
-          <figcaption><strong>Matheus Engel</strong><span>Chef confeiteiro e sócio da Dolce.me Brigadeiria</span></figcaption>
+          <figcaption className="course-instructor-experience">
+            <span className="course-instructor-identity"><strong>Matheus Engel</strong><small>Chef confeiteiro e sócio da Dolce.me</small></span>
+            <span className="course-instructor-years"><strong>+7</strong><small>anos de experiência</small></span>
+          </figcaption>
         </figure>
 
         <div className="course-instructor-copy">
-          <Copy><p className="course-instructor-label">Quem vai ensinar você?</p></Copy>
-          <Copy><h2>Conheça o chef por trás do Descomplicando Picolés.</h2></Copy>
           <Copy><p>Com sete anos de experiência na confeitaria, Matheus participa do desenvolvimento dos produtos e das técnicas utilizadas na produção da Dolce.me.</p></Copy>
           <Copy><p>Ao longo dessa trajetória, transformou sua experiência prática em conteúdos que já ajudaram milhares de alunas a aprender diferentes preparos da confeitaria.</p></Copy>
           <Copy><p>No Descomplicando Picolés, ele compartilha seus conhecimentos de maneira didática, explicando cada etapa e os fundamentos necessários para que você entenda o processo, e não apenas siga instruções.</p></Copy>
           <Copy><p className="course-instructor-closing">Para que você aprenda o porquê de cada técnica e não somente como executá-la.</p></Copy>
-          <Copy>
-            <a className="hero-premium-cta course-instructor-cta" href="https://pay.kiwify.com.br/MzpjRKm" target="_blank" rel="noreferrer">
-              <span>Quero aprender agora</span>
-              <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
-            </a>
-          </Copy>
+          <a className="hero-premium-cta course-instructor-cta" href="https://pay.kiwify.com.br/MzpjRKm" target="_blank" rel="noreferrer">
+            <span>Quero aprender agora</span>
+            <span className="hero-premium-cta-icon" aria-hidden="true"><img src="/dolce/popsicle-icon-pink-hq.png" alt="" /></span>
+          </a>
         </div>
       </div>
     </section>
