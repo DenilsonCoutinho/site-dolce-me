@@ -44,6 +44,7 @@ function MobileMarquee({ row, rowIndex }) {
   const trackRef = useRef(null);
   const firstSetRef = useRef(null);
   const positionRef = useRef(0);
+  const hasMeasuredRef = useRef(false);
   const pointerRef = useRef(null);
   const lastFrameRef = useRef(null);
   const speedRef = useRef(rowIndex === 0 ? -14 : 14);
@@ -53,8 +54,12 @@ function MobileMarquee({ row, rowIndex }) {
   const paintTrack = () => {
     const setWidth = firstSetRef.current?.offsetWidth;
     if (!setWidth) return;
-    while (positionRef.current <= -setWidth) positionRef.current += setWidth;
-    while (positionRef.current > 0) positionRef.current -= setWidth;
+    if (!hasMeasuredRef.current) {
+      positionRef.current = -setWidth;
+      hasMeasuredRef.current = true;
+    }
+    while (positionRef.current <= -setWidth * 2) positionRef.current += setWidth;
+    while (positionRef.current > -setWidth) positionRef.current -= setWidth;
     if (trackRef.current) trackRef.current.style.transform = `translate3d(${positionRef.current}px, 0, 0)`;
   };
 
@@ -111,6 +116,7 @@ function MobileMarquee({ row, rowIndex }) {
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
       >
+        <TestimonialSet row={row} hidden />
         <TestimonialSet row={row} setRef={firstSetRef} />
         <TestimonialSet row={row} hidden />
       </div>
