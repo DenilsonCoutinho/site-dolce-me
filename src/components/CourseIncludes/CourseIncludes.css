@@ -104,6 +104,7 @@
 .course-includes-bonus-gallery {
   position: relative;
   min-height: clamp(25rem, 40vw, 34rem);
+  contain: layout paint;
 }
 
 .course-includes-bonus-gallery img {
@@ -111,6 +112,7 @@
   position: absolute;
   object-fit: cover;
   box-shadow: 0 1.25rem 2.5rem rgba(79, 58, 42, .17);
+  transform: translateZ(0);
 }
 
 .course-includes-bonus-main {
