@@ -13,6 +13,7 @@ import CourseGuarantee from "@/components/CourseGuarantee/CourseGuarantee";
 import Footer from "@/components/Footer/Footer";
 import CourseDisciplines from "@/components/CourseDisciplines/CourseDisciplines";
 import Copy from "@/components/Copy/Copy";
+import MetaPixel from "@/components/MetaPixel/MetaPixel";
 import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -40,6 +41,7 @@ const Page = () => {
 
   return (
     <>
+      <MetaPixel />
       <section className="hero">
         <div className="dolce-hero-portrait">
           <picture>
